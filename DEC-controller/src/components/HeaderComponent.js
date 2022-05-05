@@ -31,7 +31,8 @@ const HeaderComponent = () => {
   }, [location.pathname]);
 
   const handleLogin = () => {
-    history.push('/login');
+    // history.push('/login');
+    history.push('/termsConditions');
   };
 
   const handleLogout = () => {

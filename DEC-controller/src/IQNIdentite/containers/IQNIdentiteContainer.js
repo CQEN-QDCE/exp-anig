@@ -7,7 +7,7 @@
 import React              from 'react';
 import { Container }      from 'reactstrap';
 import IQNIdentiteForm    from '../components/IQNIdentiteForm'
-import '../../assets/styles/LoginContainer.css'
+import '../../assets/styles/TermsContainer.css'
 
 function IQNIdentiteContainer() {
 

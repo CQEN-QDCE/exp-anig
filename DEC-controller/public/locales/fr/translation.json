@@ -20,9 +20,15 @@
     "modalCorrectInfoMsg": "Merci de saisir les informations correctes.", 
     "ok": "OK",
     "noauthMsg1": "Vous êtes perdu...", 
-    "noauthMsg2": "Vous de devrais pas être ici!", 
+    "noauthMsg2": "Vous ne devriez pas être ici!", 
     "gender":{
         "male": "Masculin", 
         "female": "Feminin"
-    }
+    },
+    "terms": "Termes et conditions",
+    "termsMsg": "Quapropter a natura mihi videtur potius quam ab indigentia orta amicitia, applicatione magis animi cum quodam sensu amandi quam cogitatione quantum illa res utilitatis esset habitura. Quod quidem quale sit, etiam in bestiis quibusdam animadverti potest, quae ex se natos ita amant ad quoddam tempus et ab eis ita amantur ut facile earum sensus appareat. Quod in homine multo est evidentius, primum ex ea caritate quae est inter natos et parentes, quae dirimi nisi detestabili scelere non potest; deinde cum similis sensus exstitit amoris, si aliquem nacti sumus cuius cum moribus et natura congruamus, quod in eo quasi lumen aliquod probitatis et virtutis perspicere videamur.",
+    "termsCheckBoxMsg": "Lucis in vero latent pluviis.",
+    "termsBtn": "Concedere sed",
+    "modalTermsMsg": "Termes et condition info",
+    "modalAcceptTermsInfoMsg": "Merci d'accepter les termes et conditions."
 }

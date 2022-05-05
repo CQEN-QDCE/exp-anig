@@ -12,7 +12,7 @@ import { useTranslation }                  from 'react-i18next'
 import { GET_API_SECRET }                  from '../../config/constants'
 import { GET_ISSUER_HOST_URL }             from '../../config/endpoints'
 import { fetchWithTimeout }                from '../../helpers/fetchWithTimeout'
-import '../../assets/styles/LoginContainer.css'
+import '../../assets/styles/TermsContainer.css'
 
 function QRIQNIdentiteContainer(props) {
 
