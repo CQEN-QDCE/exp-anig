@@ -57,7 +57,7 @@ function TermsContainer(props) {
 						</span>
 						<br/>
 					</p>
-					<h4 className="text-center">{t('translation:termsMsgSubTitle')}</h4>
+					<h3 className="text-center">{t('translation:termsMsgSubTitle')}</h3>
 					<p className="justifyText" style={{ fontSize: '12px' }}>
 					{t('translation:termsMsgPara5')} 
 					</p>
