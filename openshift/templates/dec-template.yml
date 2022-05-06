@@ -1,22 +1,22 @@
 kind: Template
 apiVersion: template.openshift.io/v1
 metadata:
-  name: dec-demo-exp-att-del
+  name: inq-demo-exp-att-del
   annotations:
     description: Site Web qui émet l'attestation pour les expérimentations d'une attestation délégué.
     tags: cqen, experimentation, sqin, aries, dec, directeur de l'état civil, émetteur, attestation, délégué
 objects:
-#DEC-kms (PostgreSQL)
+#inq-kms (PostgreSQL)
 - kind: Secret
   apiVersion: v1
   metadata:
-    name: dec-build
+    name: inq-build
   stringData:
     WebHookSecretKey: "${GITHUB_WEBHOOK_SECRET}"
 - kind: Secret
   apiVersion: v1
   metadata:
-    name: dec-kms
+    name: inq-kms
     annotations:
       template.openshift.io/expose-database-user: "{.data['database-user']}"
       template.openshift.io/expose-database-password: "{.data['database-password']}"
@@ -40,16 +40,16 @@ objects:
 - kind: Service
   apiVersion: v1
   metadata:
-    name: dec-kms
+    name: inq-kms
   spec:
     ports:
-    - name: dec-kms
+    - name: inq-kms
       protocol: TCP
       port: 5432
       targetPort: 5432
       nodePort: 0
     selector:
-      name: dec-kms
+      name: inq-kms
     type: ClusterIP
     sessionAffinity: None
   status:
@@ -57,7 +57,7 @@ objects:
 - kind: PersistentVolumeClaim
   apiVersion: v1
   metadata:
-    name: dec-kms
+    name: inq-kms
   spec:
     storageClassName: ocs-storagecluster-cephfs
     accessModes:
@@ -68,11 +68,11 @@ objects:
 - kind: DeploymentConfig
   apiVersion: v1
   metadata:
-    name: dec-kms
+    name: inq-kms
     annotations:
       template.alpha.openshift.io/wait-for-ready: 'true'
     labels:
-      app: dec-kms
+      app: inq-kms
       app.kubernetes.io/part-of: DEC
   spec:
     strategy:
@@ -80,13 +80,13 @@ objects:
     triggers:
     - github:
         secretReference:
-          name: dec-build
+          name: inq-build
       type: GitHub
     - type: ImageChange
       imageChangeParams:
         automatic: true
         containerNames:
-        - dec-kms
+        - inq-kms
         from:
           kind: ImageStreamTag
           name: postgresql:10
@@ -95,14 +95,14 @@ objects:
     - type: ConfigChange
     replicas: 1
     selector:
-      name: dec-kms
+      name: inq-kms
     template:
       metadata:
         labels:
-          name: dec-kms
+          name: inq-kms
       spec:
         containers:
-        - name: dec-kms
+        - name: inq-kms
           image: " "
           ports:
           - containerPort: 5432
@@ -124,28 +124,28 @@ objects:
           - name: POSTGRESQL_USER
             valueFrom:
               secretKeyRef:
-                name: dec-kms
+                name: inq-kms
                 key: database-user
           - name: POSTGRESQL_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: dec-kms
+                name: inq-kms
                 key: database-password
           - name: POSTGRESQL_DATABASE
             valueFrom:
               secretKeyRef:
-                name: dec-kms
+                name: inq-kms
                 key: database-name
           - name: POSTGRESQL_ADMIN_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: dec-kms
+                name: inq-kms
                 key: database-admin-password                
           resources:
             limits:
               memory: 512Mi
           volumeMounts:
-          - name: dec-kms-data
+          - name: inq-kms-data
             mountPath: "/var/lib/pgsql/data"
           terminationMessagePath: "/dev/termination-log"
           imagePullPolicy: IfNotPresent
@@ -154,30 +154,30 @@ objects:
             capabilities: {}
             privileged: false
         volumes:
-        - name: dec-kms-data
+        - name: inq-kms-data
           persistentVolumeClaim:
-            claimName: dec-kms
+            claimName: inq-kms
         restartPolicy: Always
         dnsPolicy: ClusterFirst
   status: {}
 
-#DEC-agent
+#inq-agent
 - kind: ImageStream
   apiVersion: v1
   metadata:
-    name: dec-agent
+    name: inq-agent
 - kind: BuildConfig
   apiVersion: v1
   metadata:
     labels:
-      app: dec-agent
-    name: dec-agent
+      app: inq-agent
+    name: inq-agent
   spec:
     nodeSelector: null
     output:
       to:
         kind: ImageStreamTag
-        name: 'dec-agent:latest'
+        name: 'inq-agent:latest'
     resources: {}
     successfulBuildsHistoryLimit: 5
     failedBuildsHistoryLimit: 5
@@ -190,20 +190,20 @@ objects:
       contextDir: DEC-agent
       type: Git
       git:
-        uri: 'https://github.com/CQEN-QDCE/exp-attestation-deleguee.git'
+        uri: 'https://github.com/CQEN-QDCE/exp-anig.git'
     triggers:
       - github:
           secretReference:
-            name: dec-build
+            name: inq-build
         type: GitHub
       - type: ConfigChange
     runPolicy: Serial
 - kind: DeploymentConfig
   apiVersion: v1
   metadata:
-    name: dec-agent
+    name: inq-agent
     labels:
-      app: dec-agent
+      app: inq-agent
       app.kubernetes.io/part-of: DEC
   spec:
     strategy:
@@ -219,29 +219,29 @@ objects:
     triggers:
       - github:
           secretReference:
-            name: dec-build
+            name: inq-build
         type: GitHub
       - type: ConfigChange
       - type: ImageChange
         imageChangeParams:
           automatic: true
           containerNames:
-            - dec-agent
+            - inq-agent
           from:
             kind: ImageStreamTag
-            name: 'dec-agent:latest'
+            name: 'inq-agent:latest'
     replicas: 1
     revisionHistoryLimit: 10
     test: false
     selector:
-      app: dec-agent
+      app: inq-agent
     template:
       metadata:
         labels:
-          app: dec-agent
+          app: inq-agent
       spec:
         containers:
-          - name: dec-agent
+          - name: inq-agent
             command:
               - bash
               - -c
@@ -275,7 +275,7 @@ objects:
               - name: GENESIS_FILE_URL
                 value: ${GENESIS_FILE_URL}
               - name: KMS_NAME
-                value: dec-agent
+                value: inq-agent
               - name: KMS_STORAGE_TYPE
                 value: ${KMS_STORAGE_TYPE}
               - name: KMS_STORAGE_CONFIGURATION
@@ -289,37 +289,37 @@ objects:
               - name: POSTGRESQL_KMS_USER
                 valueFrom:
                   secretKeyRef:
-                    name: dec-kms
+                    name: inq-kms
                     key: database-user
               - name: POSTGRESQL_KMS_PASSWORD
                 valueFrom:
                   secretKeyRef:
-                    name: dec-kms
+                    name: inq-kms
                     key: database-password
               - name: POSTGRESQL_KMS_ADMIN_USER
                 valueFrom:
                   secretKeyRef:
-                    name: dec-kms
+                    name: inq-kms
                     key: database-admin-user
               - name: POSTGRESQL_KMS_ADMIN_PASSWORD
                 valueFrom:
                   secretKeyRef:
-                    name: dec-kms
+                    name: inq-kms
                     key: database-admin-password
               - name: MASTER_KEY
                 valueFrom:
                   secretKeyRef:
-                    name: dec-kms
+                    name: inq-kms
                     key: master-key
               - name: AGENT_DID_SEED
                 valueFrom:
                   secretKeyRef:
-                    name: dec-kms
+                    name: inq-kms
                     key: agent-did-seed
               - name: AGENT_DID
                 valueFrom:
                   secretKeyRef:
-                    name: dec-kms
+                    name: inq-kms
                     key: agent-did
               - name: HTTP_INTERFACE_PORT
                 value: ${AGENT_HTTP_PORT}
@@ -328,7 +328,7 @@ objects:
               - name: AGENT_ADMIN_API_KEY
                 valueFrom:
                   secretKeyRef:
-                    name: dec-kms
+                    name: inq-kms
                     key: admin-api-key
               - name: AGENT_NAME
                 value: ${AGENT_NAME}
@@ -370,10 +370,10 @@ objects:
 - kind: Service
   apiVersion: v1
   metadata:
-    name: dec-agent
+    name: inq-agent
   spec:
     selector:
-      app: dec-agent
+      app: inq-agent
     ports:
       - name: '3000'
         protocol: TCP
@@ -386,12 +386,12 @@ objects:
 - kind: Route
   apiVersion: v1
   metadata:
-    name: dec-agent
+    name: inq-agent
   spec:
-    host: dec-agent.apps.dev.openshift.cqen.ca
+    host: inq-agent.apps.dev.openshift.cqen.ca
     to:
       kind: Service
-      name: dec-agent
+      name: inq-agent
       weight: 100
     port:
       targetPort: 8000
@@ -401,7 +401,7 @@ objects:
     wildcardPolicy: None
   status:
     ingress:
-      - host: dec-agent.apps.dev.openshift.cqen.ca
+      - host: inq-agent.apps.dev.openshift.cqen.ca
         routerName: default
         conditions:
           - type: Admitted
@@ -411,12 +411,12 @@ objects:
 - kind: Route
   apiVersion: v1
   metadata:
-    name: dec-agent-admin
+    name: inq-agent-admin
   spec:
-    host: dec-agent-admin.apps.dev.openshift.cqen.ca
+    host: inq-agent-admin.apps.dev.openshift.cqen.ca
     to:
       kind: Service
-      name: dec-agent
+      name: inq-agent
       weight: 100
     port:
       targetPort: 3000
@@ -426,7 +426,7 @@ objects:
     wildcardPolicy: None
   status:
     ingress:
-      - host: dec-agent-admin.apps.dev.openshift.cqen.ca
+      - host: inq-agent-admin.apps.dev.openshift.cqen.ca
         routerName: default
         conditions:
           - type: Admitted
@@ -434,11 +434,11 @@ objects:
         wildcardPolicy: None
         routerCanonicalHostname: apps.dev.openshift.cqen.ca
 
-#DEC-controller
+#inq-controller
 - kind: ConfigMap
   apiVersion: v1
   metadata:
-    name: dec-controller
+    name: inq-controller
   data:
     config.js: |
       window.env = {
@@ -450,25 +450,25 @@ objects:
 - kind: ImageStream
   apiVersion: v1
   metadata:
-    name: dec-controller
+    name: inq-controller
 - kind: BuildConfig
   apiVersion: v1
   metadata:
     annotations:
-      app.openshift.io/vcs-uri: https://github.com/CQEN-QDCE/exp-attestation-deleguee.git
+      app.openshift.io/vcs-uri: https://github.com/CQEN-QDCE/exp-anig.git
       template.alpha.openshift.io/wait-for-ready: "true"
     labels:
-      app: dec-controller
-    name: dec-controller
+      app: inq-controller
+    name: inq-controller
   spec:
     output:
       to:
         kind: ImageStreamTag
-        name: dec-controller:latest
+        name: inq-controller:latest
     source:
       contextDir: DEC-controller
       git:
-        uri: https://github.com/CQEN-QDCE/exp-attestation-deleguee.git
+        uri: https://github.com/CQEN-QDCE/exp-anig.git
       type: Git
     strategy:
       dockerStrategy:
@@ -477,15 +477,15 @@ objects:
     triggers:
       - github:
           secretReference:
-            name: dec-build
+            name: inq-build
         type: GitHub
       - type: ConfigChange
 - kind: DeploymentConfig
   apiVersion: v1
   metadata:
-    name: dec-controller
+    name: inq-controller
     labels:
-      app: dec-controller
+      app: inq-controller
       app.kubernetes.io/part-of: DEC
   spec:
     strategy:
@@ -501,29 +501,29 @@ objects:
     triggers:
       - github:
           secretReference:
-            name: dec-build
+            name: inq-build
         type: GitHub
       - type: ConfigChange
       - type: ImageChange
         imageChangeParams:
           automatic: true
           containerNames:
-            - dec-controller
+            - inq-controller
           from:
             kind: ImageStreamTag
-            name: "dec-controller:latest"
+            name: "inq-controller:latest"
     replicas: 1
     revisionHistoryLimit: 10
     test: false
     selector:
-      app: dec-controller
+      app: inq-controller
     template:
       metadata:
         labels:
-          app: dec-controller
+          app: inq-controller
       spec:
         containers:
-          - name: dec-controller
+          - name: inq-controller
             env:
               - name: REACT_APP_ISSUER_HOST_URL
                 value: ${AGENT_ADMIN_ENDPOINT}
@@ -541,7 +541,7 @@ objects:
         volumes:
           - name: config-volume
             configMap:
-              name: dec-controller
+              name: inq-controller
               items:
               - key: "config.js"
                 path: "config.js"
@@ -553,10 +553,10 @@ objects:
 - kind: Service
   apiVersion: v1
   metadata:
-    name: dec-controller
+    name: inq-controller
   spec:
     selector:
-      app: dec-controller
+      app: inq-controller
     ports:
       - name: "10000"
         protocol: TCP
@@ -565,12 +565,12 @@ objects:
 - kind: Route
   apiVersion: v1
   metadata:
-    name: dec-controller
+    name: inq
   spec:
-    host: dec-controller.apps.dev.openshift.cqen.ca
+    host: inq.apps.dev.openshift.cqen.ca
     to:
       kind: Service
-      name: dec-controller
+      name: inq-controller
       weight: 100
     port:
       targetPort: 10000
@@ -580,7 +580,7 @@ objects:
     wildcardPolicy: None
   status:
     ingress:
-      - host: dec-controller.apps.dev.openshift.cqen.ca
+      - host: inq.apps.dev.openshift.cqen.ca
         routerName: default
         conditions:
           - type: Admitted
@@ -600,7 +600,7 @@ parameters:
   generate: "expression"
   from: "[a-zA-Z0-9]{16}"
 - name: POSTGRESQL_ADMIN_PASSWORD
-  displayName: PostgreSQL administrator password
+  fdisplayName: PostgreSQL administrator password
   description: Password for the PostgreSQL administrative account. Needs to be basee64 encoded.
   required: true
   generate: "expression"
@@ -624,7 +624,7 @@ parameters:
   displayName: PostgreSql key management service hostname
   required: true
   description: Hostname of the deployed PostgreSql key management service.  Only used when KMS_STORAGE_TYPE = postgres_storage.
-  value: dec-kms
+  value: inq-kms
 - name: POSTGRESQL_KMS_PORT
   displayName: PostgreSql key management service port
   required: true
@@ -700,9 +700,9 @@ parameters:
   displayName: Agent endpoint
   description: The endpoint of the agent.
   required: true
-  value: "https://dec-agent.apps.dev.openshift.cqen.ca"
+  value: "https://inq-agent.apps.dev.openshift.cqen.ca"
 - name: AGENT_ADMIN_ENDPOINT
   displayName: Agent endpoint
   description: The admin endpoint of the agent.
   required: true
-  value: "https://dec-agent-admin.apps.dev.openshift.cqen.ca"
+  value: "https://inq-agent-admin.apps.dev.openshift.cqen.ca"
