@@ -25,10 +25,14 @@
         "male": "Male", 
         "female": "Female"
     },
-    "terms": "Terms and Conditions",
-    "termsMsg": "Quapropter a natura mihi videtur potius quam ab indigentia orta amicitia, applicatione magis animi cum quodam sensu amandi quam cogitatione quantum illa res utilitatis esset habitura. Quod quidem quale sit, etiam in bestiis quibusdam animadverti potest, quae ex se natos ita amant ad quoddam tempus et ab eis ita amantur ut facile earum sensus appareat. Quod in homine multo est evidentius, primum ex ea caritate quae est inter natos et parentes, quae dirimi nisi detestabili scelere non potest; deinde cum similis sensus exstitit amoris, si aliquem nacti sumus cuius cum moribus et natura congruamus, quod in eo quasi lumen aliquod probitatis et virtutis perspicere videamur.",
-    "termsCheckBoxMsg": "Lucis in vero latent pluviis.",
-    "termsBtn": "Concedere sed",
-    "modalTermsMsg": "Terms and Conditions info",
-    "modalAcceptTermsInfoMsg": "Please, accept the terms and conditions."
+    "terms": "Terms of service",
+    "termsMsgPara1": "This is a proof of concept verifiable credential issuer service that is NOT to be used for production purposes. The service exists to demonstrate the form of a digital credential of personal information a person might receive from a government such as the government of British Columbia. Such a credential is a trusted, digital version containing the information commonly issued by governments on paper, such as a driver's license or passport. In a \"real\" version of an Issuer service, individuals would complete a verification process of who they are prior to the issuance of the digital credential to them, about them. The information in the credential would be sourced from the authority that holds that information. For more information about Digital Identity and Trust demonstrated with this service, see the BC Digital Trust Information website. The credential generated from this service is only to be used with proof of concept, non-production credential Verifier services.",
+    "termsMsgPara2": "The basis for this service is Issuer Kit, an open source application that allows the easy configuration of issuers of verifiable credentials. Questions about this example service and Issuer Kit are welcome via the email address below and in the Issuer Kit repository. Contributions to Issuer Kit are also welcome!",
+    "termsMsgPara3": "Do not use your own personal information in this service. This is not a production service and the data you provide should not be based on your own personal information.",
+    "termsMsgPara4": "If you have any questions about this service or our collection or use of personal information, please direct your inquiries to the BC Digital Identity and Trust Service team:",
+    "email": "Email : ditrust@gov.bc.ca",
+    "termsMsgSubTitle": "Limitation of Liabilities",
+    "termsMsgPara5": "Under no circumstances will the Government of British Columbia be liable to any person or business entity for any direct, indirect, special, incidental, consequential, or other damages based on any use of this website or any other website to which this site is linked, including, without limitation, any lost profits, business interruption, or loss of programs or information, even if the Government of British Columbia has been specifically advised of the possibility of such damages.",
+    "termsCheckBoxMsg": "I agree with the above terms and conditions.",
+    "termsBtn": "AGREE"
 } 

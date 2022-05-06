@@ -1,19 +1,19 @@
 .App {
-    width: 100%;  
-    min-height: 100vh;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    text-align: left;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
   /* margin-top: 100px; */
 }
 
-.Root{
-    min-height: 100vh;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+.Root {
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .form {
@@ -21,30 +21,34 @@
   background: #fff;
   overflow: hidden;
   box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
-  border: 1px solid #FCF8F7;
-  border-radius: .5em;
-  width: 500px;
-  
+  border: 1px solid #fcf8f7;
+  border-radius: 0.5em;
+  width: 80%;
 }
+
+.justifyText {
+  text-align: justify;
+}
+
 .inputField[type="email"]:hover {
-    border: 1px solid #1c0cf5;
-    border-radius: .5em;
-    box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  border: 1px solid #1c0cf5;
+  border-radius: 0.5em;
+  box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
 }
 .inputField[type="email"]:focus {
-    border: 1px solid #1c0cf5;
-    border-radius: .5em;
-    box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  border: 1px solid #1c0cf5;
+  border-radius: 0.5em;
+  box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
 }
-.inputField[type="password"]:focus{
-    border: 1px solid #1c0cf5;
-    border-radius: .5em;
-    box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+.inputField[type="password"]:focus {
+  border: 1px solid #1c0cf5;
+  border-radius: 0.5em;
+  box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
 }
-.inputField[type="password"]:hover{
-    border: 1px solid #1c0cf5;
-    border-radius: .5em;
-    box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+.inputField[type="password"]:hover {
+  border: 1px solid #1c0cf5;
+  border-radius: 0.5em;
+  box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
 }
 
 label {
@@ -53,10 +57,8 @@ label {
 }
 
 .btny {
-    color: #FF4C4C;
-    border: 1px solid #FF4C4C;
-    border-radius: .5em;
-    box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  color: #ff4c4c;
+  border: 1px solid #ff4c4c;
+  border-radius: 0.5em;
+  box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
 }
-
-

@@ -39,31 +39,41 @@ function TermsContainer(props) {
 
 			<Container className="App" >
 				<Form className="form">
-					<h2 className="text-center">{t('translation:terms')}</h2>
-					<p className="text-center" style={{ color: '#898989', fontSize: '12px' }}>
-						{t('translation:termsMsg')} 
+					<h3 className="text-center">{t('translation:terms')}</h3>
+					<p className="justifyText" style={{ fontSize: '12px' }}>
+						{t('translation:termsMsgPara1')} 
+						<br/>
+						<br/>
+						{t('translation:termsMsgPara2')} 
+						<br/>
+						<br/>
+						{t('translation:termsMsgPara3')} 
+						<br/>
+						<br/>
+						{t('translation:termsMsgPara4')} 
+						<br/>
+						<span className="text-center"style={{fontWeight: 'bold'}}>
+							{t('translation:email')} 
+						</span>
+						<br/>
 					</p>
+					<h4 className="text-center">{t('translation:termsMsgSubTitle')}</h4>
+					<p className="justifyText" style={{ fontSize: '12px' }}>
+					{t('translation:termsMsgPara5')} 
+					</p>
+					
 					<Col>
 						<FormGroup>
-							<label className="text-center align-center">
+							<label className="text-justify align-center">
 								<input className="m-2" type="checkbox" checked={checkBox} onChange={handleChange}/>
 								{t('translation:termsCheckBoxMsg')}
 							</label>
 						</FormGroup>
 					</Col>
 					<div className="text-center ">
-						<Button className="mt-2" outline color="primary" size="lg" onClick={handleSubmit}>{t('translation:termsBtn')}</Button>
+						<Button className="mt-2" disabled={!checkBox} outline color="primary" size="lg" onClick={handleSubmit}>{t('translation:termsBtn')}</Button>
 					</div>
 				</Form>
-				<div>
-					<Modal isOpen={modal} toggle={toggle} centered>
-						<ModalHeader toggle={toggle}>{t('translation:modalTermsMsg')}</ModalHeader>
-						<ModalBody>{t('translation:modalAcceptTermsInfoMsg')}</ModalBody>
-						<ModalFooter>
-							<Button color="primary" onClick={toggle}>{t('translation:ok')}</Button>{' '}
-						</ModalFooter>
-					</Modal>
-				</div>
 			</Container>
 		</div >
 	);
