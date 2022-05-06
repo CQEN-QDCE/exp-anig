@@ -65,7 +65,7 @@ function TermsContainer(props) {
 					<Col>
 						<FormGroup>
 							<label className="text-justify align-center">
-								<input className="m-2" type="checkbox" checked={checkBox} onChange={handleChange}/>
+								<input className="m-1" type="checkbox" checked={checkBox} onChange={handleChange}/>
 								{t('translation:termsCheckBoxMsg')}
 							</label>
 						</FormGroup>

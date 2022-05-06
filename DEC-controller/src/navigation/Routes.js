@@ -51,7 +51,7 @@ function Routes() {
 
 					{ /* Routes de base de l'app */ }
 					<Route path="/noauth" component={NoAuthContainer} />
-					<Route path="/termsconditions" component={TermsContainer}/>
+					<Route path="/terms" component={TermsContainer}/>
 					<Route path="/" exact component={MainContainer} />
 
 				</Switch>
