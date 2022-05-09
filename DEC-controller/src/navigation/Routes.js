@@ -9,7 +9,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import HeaderComponent                            from '../components/HeaderComponent'
 import FooterComponent                            from '../components/FooterComponent'
 import MainContainer                              from '../containers/MainContainer'
-import LoginContainer                             from '../containers/LoginContainer'
 import NoAuthContainer                            from '../containers/NoAuthContainer'
 import IQNIdentiteContainer                       from '../IQNIdentite/containers/IQNIdentiteContainer'
 import QRIQNIdentiteContainer                     from '../IQNIdentite/containers/QRIQNIdentiteContainer'
@@ -20,6 +19,7 @@ import VerificationIdentiteContainer              from '../IQNIdentite/container
 import EmissionIdentiteContainer                  from '../containers/EmissionIdentiteContainer'
 import Auth from '../helpers/Auth'
 import ImageHanderContainer from '../ImageHandling/containers/ImageHandlerContainer'
+import TermsContainer from '../containers/TermsContainer'
 
 
 
@@ -51,7 +51,7 @@ function Routes() {
 
 					{ /* Routes de base de l'app */ }
 					<Route path="/noauth" component={NoAuthContainer} />
-					<Route path="/login"  component={LoginContainer} />
+					<Route path="/terms" component={TermsContainer}/>
 					<Route path="/" exact component={MainContainer} />
 
 				</Switch>

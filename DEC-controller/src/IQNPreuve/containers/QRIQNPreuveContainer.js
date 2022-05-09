@@ -9,7 +9,7 @@ import { Container, Button, Col, Spinner }  from 'reactstrap'
 import QRPreuveComponent                    from '../components/QRPreuveComponent'
 import { GET_API_SECRET }                   from '../../config/constants'
 import { fetchWithTimeout }                 from '../../helpers/fetchWithTimeout'
-import '../../assets/styles/LoginContainer.css'
+import '../../assets/styles/TermsContainer.css'
 
 function QRIQNPreuveContainer(props){
 

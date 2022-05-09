@@ -7,7 +7,7 @@
 import React, { useState, useEffect }      from 'react'
 import { GET_API_SECRET }                  from '../config/constants'
 import { GET_ISSUER_HOST_URL }             from '../config/endpoints'
-import '../assets/styles/LoginContainer.css'
+import '../assets/styles/TermsContainer.css'
 
 function EmissionIdentiteContainer(props){
 

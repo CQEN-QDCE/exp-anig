@@ -12,7 +12,7 @@ import { useTranslation }             from 'react-i18next'
 import { globalStyles }               from '../assets/styles/globalStyles';
 import Auth                           from '../helpers/Auth';
 import useWindowDimensions            from '../helpers/useWindowDimensions';
-import QuebecLogo                     from '../assets/images/dec.png';
+import QuebecLogo                     from '../assets/images/logoQuebec.png';
 import LoginIcon                      from '@material-ui/icons/AccountCircle';
 import LogoutIcon                     from '@material-ui/icons/ExitToApp';
 
@@ -31,7 +31,8 @@ const HeaderComponent = () => {
   }, [location.pathname]);
 
   const handleLogin = () => {
-    history.push('/login');
+    // history.push('/login');
+    history.push('/terms');
   };
 
   const handleLogout = () => {

@@ -14,15 +14,12 @@ const JumbotronComponent = () => {
     <header>
       <div className="pt-5 container-fluid text-center" >
 
-        <div className="row" >
+        <div className="row center-content" >
           <div className="col-md-7 col-sm-12">
-            <h1>Directeur de l'état civil</h1>
+            <h1>Gouvernement du Québec</h1>
             <p className="lead">
               {t('translation:welcomeMessage')}
             </p>
-          </div>
-          <div className="col-md-5 col-sm-12">
-            &nbsp;
           </div>
         </div>
       </div>
