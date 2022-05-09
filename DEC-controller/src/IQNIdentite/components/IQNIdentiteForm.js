@@ -5,13 +5,13 @@
 * License-Filename: /LICENSE
 */
 import React, { useState }      from 'react';
-import { Col, Row, Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter,
-         Dropdown, DropdownToggle, DropdownMenu, DropdownItem, CardColumns} from 'reactstrap';
+import { Col, Row, Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import { useHistory }           from 'react-router-dom'
 import { useTranslation }       from 'react-i18next'
 import { v4 as uuidv4 }         from 'uuid'
 import { GET_API_SECRET }       from '../../config/constants'
 import { GET_ISSUER_HOST_URL }  from '../../config/endpoints'
+import UploadIcon from '@material-ui/icons/CloudUpload';
 import '../../assets/styles/Forms.css'
 
 const IQNIdentiteForm = () => {
@@ -25,27 +25,29 @@ const IQNIdentiteForm = () => {
     return "did:sov:" + uuidv4().substring(25);
   }
 
+  const getFormattedDate = (date) => {
+    return date.getFullYear() + '-' + date.getMonth().toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0');
+  }
+
   /**
    * Definition des variables du formulaire
    */
-  const [issuanceDate, setIssuanceDate]             = useState('2020-10-08')
-  const [id, setId]                                 = useState(formatID())
-  const [firstNames, setFirstNames]                 = useState('Sarah')
-  const [lastName, setLastName]                     = useState('Courcy')
-  const [gender, setGender]                         = useState(t('translation:gender.female'))
-  const [birthplace, setBirthplace]                 = useState('Ville de Québec, Québec, Canada')
-  const [birthDate, setBirthDate]                   = useState('1976-11-08')
-  const [fatherFullName, setFatherFullName]         = useState('Mathieu Courcy')
-  const [motherFullName, setMotherFullName]         = useState('Marie Courcy')
-  const [registrationNumber, setRegistrationNumber] = useState(uuidv4())
-  const [holderChoix, setHolderChoix]               = useState(t('identite:holder.you'))
-  const [holderType, setHolderType]                 = useState(t('identite:mother'))
+  const currentDate = new Date();
+  const defaultExpirationDate = new Date((currentDate.getFullYear() + 1), currentDate.getMonth(), currentDate.getDate());
+
+  const [issuanceDate, setIssuanceDate]             = useState(getFormattedDate(currentDate));
+  const [expirationDate, setExpirationDate]         = useState(getFormattedDate(defaultExpirationDate));
+  const [identificationLevel, setIdentificationLevel] = useState(1);
+  const [firstNames, setFirstNames]                 = useState('Sarah');
+  const [lastName, setLastName]                     = useState('Courcy');
+  const [birthDate, setBirthDate]                   = useState('1976-11-08');
+  const [parent1FullName, setParent1FullName]         = useState('Marie Courcy');
+  const [parent2FullName, setMotherFullName]         = useState('inconnu');
   
-  const [selectedFile, setSelectedFile]             = useState('')
-  const [photoPreview, setPhotoPreview]             = useState('')
+  const [selectedFile, setSelectedFile]             = useState('');
+  const [photoPreview, setPhotoPreview]             = useState('');
 
   // Date d'expiration calculée en fonction de l'âge légal, dans le cas d'attestation pour enfants
-  let expirationDate = "";
 
   // Controle de dropdown pour gender 
   const [genderdropdownOpen, setGenderOpen] = useState(false)
@@ -61,6 +63,20 @@ const IQNIdentiteForm = () => {
   const [modal, setModal]                   = useState(false);
   const history                             = useHistory();
 
+  
+  const validateIdentificationLevel = (identificationLevel) => {
+    if (identificationLevel > 3) {
+      setIdentificationLevel(3);
+    }
+    else if(identificationLevel < 1) {
+      setIdentificationLevel(1);
+    }
+    else {
+      setIdentificationLevel(identificationLevel);
+    }
+  }
+  
+
   /**
    * Traitement du click du button. Si les champs obligatoires ne sont pas remplis, 
    * émmetre un message d'erreur et retourner l'usager au form; sinon, soumettre une 
@@ -69,27 +85,17 @@ const IQNIdentiteForm = () => {
    */
   const handleRequest = () => {
     if (issuanceDate       === '' |
-        id                 === '' | 
         firstNames         === '' | 
         lastName           === '' | 
-        gender             === '' | 
-        birthplace         === '' | 
+        expirationDate     === '' | 
         birthDate          === '' | 
-        fatherFullName     === '' | 
-        motherFullName     === '' | 
-        registrationNumber === '' | 
+        parent1FullName     === '' | 
+        parent2FullName     === '' | 
         selectedFile       === '' ) {
       toggle();
     }
     else {
-      if(holderChoix === t('identite:holder.you')){
-        creerInvitation('/qriqnidentite'); 
-      } else if(holderChoix === t('identite:holder.child')){
-        calcMajority();
-        creerInvitation('/qriqnpreuve'); 
-      } else {
-        alert("Probleme de parametrisation. Param invalide: " + holderChoix);
-      }
+      creerInvitation('/qriqnidentite'); 
     }
   }
 
@@ -120,7 +126,6 @@ const IQNIdentiteForm = () => {
     }
 
   function creerInvitation(destination){
-
     fetch('/connections/create-invitation',
     {
       method: 'POST',
@@ -135,28 +140,25 @@ const IQNIdentiteForm = () => {
       }
     }).then((
       resp => resp.json().then((
-        data => 
+        data => {
+          console.log(data);
           history.push(destination,
             {
               type: "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/invitation", 
               data: {
                 issuanceDate       : issuanceDate, 
                 expirationDate     : expirationDate, 
-                id                 : id, 
                 firstNames         : firstNames, 
                 lastName           : lastName, 
-                gender             : gender,
-                birthplace         : birthplace, 
                 birthDate          : birthDate, 
-                fatherFullName     : fatherFullName, 
-                motherFullName     : motherFullName, 
-                registrationNumber : registrationNumber, 
-                holderChoix        : holderChoix, 
+                fatherFullName     : parent1FullName, 
+                motherFullName     : parent2FullName, 
                 photo              : selectedFile
               },
               invitation: data
             } 
           )
+        }
       ))
     ))
   }
@@ -174,126 +176,71 @@ const IQNIdentiteForm = () => {
 
   function changePersonne(e){
       let target = e.target.innerText; 
-      setHolderChoix(e.target.innerText)
-
+     
       if(target === 'Vous' || target === 'Yourself'){
         setFirstNames('Sarah'); 
         setMotherFullName('Marie Courcy'); 
-        setFatherFullName('Mathieu Courcy'); 
+        setParent1FullName('Mathieu Courcy'); 
         setBirthDate('1976-11-08'); 
         setIssuanceDate('2019-07-17');
       } else {
         setFirstNames('Alice'); 
         setMotherFullName('Sarah Courcy'); 
-        setFatherFullName('Michel Courcy'); 
+        setParent1FullName('Michel Courcy'); 
         setBirthDate('2020-12-22'); 
         setIssuanceDate('2020-12-22');
       }
   }
 
   return (
-    <Form className="text-center FormBox">
+    <Form className="text-center FormBox m-2">
       <h1 className="mb-5 pb-4 mt-3 header">{t('identite:digitalID')}</h1>
       <br />
-      <Row form>
-      <Col md={4}>
-          <FormGroup>
-            <Label for="holderChoix">Faites-vous la demande pour:</Label>
-            <Dropdown isOpen={holderDropdownOpen} toggle={holderToggle} >
-                <DropdownToggle caret color="light" className="inputField rounded-pill">
-                    {holderChoix}
-                </DropdownToggle>
-                <DropdownMenu value={holderChoix} name="holderChoix">
-                    <DropdownItem name="self"   onClick={ changePersonne }> {t('identite:holder.you')}   </DropdownItem>
-                    <DropdownItem name="child"  onClick={ changePersonne } > {t('identite:holder.child')} </DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-          </FormGroup>
-        </Col>
-      </Row>
-      <Row form>
-        <Col md={4}>
-          <FormGroup>
-            <Label for="firstNames">{t('identite:credentialSubject.firstNames')}</Label>
-            <Input type="text" className="inputField rounded-pill" name="firstNames" id="firstNames" onChange={(e) => setFirstNames(e.target.value)} placeholder={t('identite:credentialSubject.firstNames')} value={firstNames} />
-          </FormGroup>
-        </Col>
-        <Col md={4}>
-          <FormGroup>
-            <Label for="lastName">{t('identite:credentialSubject.lastName')}</Label>
-            <Input type="text" className="inputField rounded-pill" name="lastName" id="lastName" onChange={(e) => setLastName(e.target.value)} placeholder={t('identite:credentialSubject.lastName')} value={lastName} />
-          </FormGroup>
-        </Col>
-        <Col md={4}>
-          <FormGroup>
-            <Label for="birthDate">{t('identite:credentialSubject.birthDate')}</Label>
-            <Input type="date" className="inputField rounded-pill" name="birthDate" id="birthDate" onChange={(e) => setBirthDate(e.target.value)} placeholder={t('identite:credentialSubject.birthDate')} value={birthDate} />
-          </FormGroup>
-        </Col>
-        
-        
-        <Col md={4}>
-          <FormGroup>
-            <Label for="birthplace">{t('identite:credentialSubject.birthplace')}</Label>
-            <Input type="text" className="inputField rounded-pill" name="birthplace" id="birthplace" onChange={(e) => setBirthplace(e.target.value)} placeholder={t('identite:credentialSubject.birthplace')} value={birthplace} />
-          </FormGroup>
-        </Col>
-        <Col md={4}>
-          <FormGroup>
-            <Label for="fatherFullName">{t('identite:credentialSubject.fatherFullName')}</Label>
-            <Input type="text" className="inputField rounded-pill" name="fatherFullName" id="fatherFullName" onChange={(e) => setFatherFullName(e.target.value)} placeholder={t('identite:credentialSubject.fatherFullName')} value={fatherFullName} />
-          </FormGroup>
-        </Col>
-        <Col md={4}>
-          <FormGroup>
-            <Label for="motherFullName">{t('identite:credentialSubject.motherFullName')}</Label>
-            <Input type="text" className="inputField rounded-pill" name="motherFullName" id="motherFullName" onChange={(e) => setMotherFullName(e.target.value)} placeholder={t('identite:credentialSubject.motherFullName')} value={motherFullName} />
-          </FormGroup>
-        </Col>
+      <FormGroup>
+        <Label for="firstNames">{t('identite:credentialSubject.firstNames')}: *</Label>
+        <Input type="text" className="inputField rounded-pill" name="firstNames" id="firstNames" onChange={(e) => setFirstNames(e.target.value)} placeholder={t('identite:credentialSubject.firstNames')} value={firstNames} />
+      </FormGroup>
+    
+      <FormGroup>
+        <Label for="lastName">{t('identite:credentialSubject.lastName')}: *</Label>
+        <Input type="text" className="inputField rounded-pill" name="lastName" id="lastName" onChange={(e) => setLastName(e.target.value)} placeholder={t('identite:credentialSubject.lastName')} value={lastName} />
+      </FormGroup>
+    
+      <FormGroup>
+        <Label for="birthDate">{t('identite:credentialSubject.birthDate')}: *</Label>
+        <Input type="date" className="inputField rounded-pill" name="birthDate" id="birthDate" onChange={(e) => setBirthDate(e.target.value)} placeholder={t('identite:credentialSubject.birthDate')} value={birthDate} />
+      </FormGroup>
+      <FormGroup>
+        <Label for="fatherFullName">{t('identite:credentialSubject.parent1FullName')}: *</Label>
+        <Input type="text" className="inputField rounded-pill" name="parent1FullName" id="parent1FullName" onChange={(e) => setParent1FullName(e.target.value)} placeholder={t('identite:credentialSubject.parent1FullName')} value={parent1FullName} />
+      </FormGroup>
+      <FormGroup>
+        <Label for="motherFullName">{t('identite:credentialSubject.parent2FullName')}: *</Label>
+        <Input type="text" className="inputField rounded-pill" name="parent2FullName" id="parent2FullName" onChange={(e) => setMotherFullName(e.target.value)} placeholder={t('identite:credentialSubject.parent2FullName')} value={parent2FullName} />
+      </FormGroup>
+      <FormGroup>
+        <Label for="issuanceDate">{t('identite:issuanceDate')}: *</Label>
+        <Input type="date" disabled className="inputField rounded-pill" name="issuanceDate" id="issuanceDate" onChange={(e) => setIssuanceDate(e.target.value)} placeholder={t('identite:issuanceDate')} value={issuanceDate} />
+      </FormGroup>
+      <FormGroup>
+        <Label for="expirationDate">{t('identite:expirationDate')}: *</Label>
+        <Input type="date" className="inputField rounded-pill" name="expirationDate" id="expirationDate" onChange={(e) => setExpirationDate(e.target.value)} placeholder={t('identite:expirationDate')} value={expirationDate} />
+      </FormGroup>
+      <FormGroup>
+        <Label for="identificationLevel">{t('identite:credentialSubject.identificationLevel')}: *</Label>
+        <Input type="number" max={3} min={1} className="inputField rounded-pill" name="identificationLevel" id="identificationLevel" onChange={(e) => validateIdentificationLevel(e.target.value)} placeholder={t('identite:credentialSubject.identificationLevel')} value={identificationLevel} />
+      </FormGroup>
 
-        <Col md={4}>
-          <FormGroup>
-            <Label for="issuanceDate">{t('identite:issuanceDate')}</Label>
-            <Input type="date" className="inputField rounded-pill" name="issuanceDate" id="issuanceDate" onChange={(e) => setIssuanceDate(e.target.value)} placeholder={t('identite:issuanceDate')} value={issuanceDate} />
-          </FormGroup>
-        </Col>
-        <Col md={4}>
-          <FormGroup>
-            <Label for="gender">{t('identite:credentialSubject.gender')}</Label>
-            <Dropdown isOpen={genderdropdownOpen} toggle={gendertoggle}  className="inputField rounded-pill">
-                <DropdownToggle caret color="light" className="inputField rounded-pill">
-                    {gender}
-                </DropdownToggle>
-                <DropdownMenu value={gender} name="gender">
-                    <DropdownItem name="male"   onClick={(e) => { setGender(e.target.innerText) }} >{t('translation:gender.male')}  </DropdownItem>
-                    <DropdownItem name="female" onClick={(e) => { setGender(e.target.innerText) }} >{t('translation:gender.female')}</DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-          </FormGroup>
-        </Col>
-        <Col md={4}>
-          <FormGroup>
-            <Label for="registrationNumber">{t('identite:credentialSubject.registrationNumber')}</Label>
-            <Input type="text" className="inputField rounded-pill" name="registrationNumber" id="registrationNumber" onChange={(e) => setRegistrationNumber(e.target.value)} placeholder={t('identite:credentialSubject.registrationNumber')} value={registrationNumber} />
-          </FormGroup>
-        </Col>
-      </Row>
-      <Row form>
-            <Col md={4}>
-                <FormGroup>
-                    <Label for="photo">Photo</Label>
-                    <Input type="file" className="inputField rounded-pill" name="photo" id="photo" onChange={handleFiles} placeholder="Photo" />
-                </FormGroup>
-            </Col>
-            <Col md={4}>
-                <FormGroup>
-                    <div id="preview">
-                        <Label for="photoPreview">Photo</Label>
-                        <img src={photoPreview} id="photoImage" width="400" />
-                    </div>
-                </FormGroup>
-            </Col>
-        </Row>
+
+     
+     
+      <FormGroup>
+          <Label for="photo">Photo</Label>
+          <Input type="file" className="inputField" name="photo" id="photo" onChange={handleFiles} placeholder="Photo" />
+  
+          <img src={photoPreview} id="photoImage" width="200" />
+      </FormGroup>
+
 
       <Button onClick={handleRequest} outline color="primary" className="m-3">{t('identite:btnIssue')}</Button>
       <br />

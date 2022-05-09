@@ -18,9 +18,9 @@
         "gender": "Genre", 
         "birthplace": "Lieu de naissance", 
         "birthDate": "Date de naissance", 
-        "fatherFullName": "Nom complèt du père", 
-        "motherFullName": "Nom complèt de la mère", 
-        "registrationNumber": "Numéro de registre"
+        "parent1FullName": "Nom du parent 1", 
+        "parent2FullName": "Nom du parent 2", 
+        "identificationLevel": "Niveau d'identification"
     }, 
     "btnIssue": "Émettre l'Identité IQN",
     "IQNIdentity": "Identité IQN",
