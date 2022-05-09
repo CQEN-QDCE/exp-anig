@@ -9,7 +9,8 @@ Une interface d'usager pour émmetre des attestations fondamentales, pour souten
 
 ## Instalation 
 
-D'abord, faire clone du dépôt de code: 
+
+D'abord, cloner du dépôt de code: 
 
     git clone https://github.com/CQEN-QDCE/issuer.git
 
