@@ -92,7 +92,6 @@ function QRIQNIdentiteContainer(props) {
 		console.log("props.location.state.data.fatherFullName ", props.location.state.data.fatherFullName); 
 		console.log("props.location.state.data.motherFullName ", props.location.state.data.motherFullName); 
         console.log("props.location.state.data.registrationNumber ", props.location.state.data.registrationNumber); */
-        
 		fetch(`/issue-credential/send`,
 			{
 				method: 'POST',
@@ -120,7 +119,7 @@ function QRIQNIdentiteContainer(props) {
 							{
 								"name": "issuer",
 								"value": "http://iqn.cqen.gouv.qc.ca"
-                            }, */
+                            },
                             {
 								"name": "holder.id",
 								"value": ""
@@ -128,39 +127,45 @@ function QRIQNIdentiteContainer(props) {
 							{
 								"name": "holder.type",
 								"value": ""
-                            },
-                            {
-								"name": "issuanceDate",
-								"value": props.location.state.data.issuanceDate
-							},
+                            }, */
+
 							{
-								"name": "expirationDate",
-								"value": ""                                         // Identite self = sans expiration props.location.state.data.expirationDate
-                            },
-                            {
-								"name": "credentialSubject.id",
-								"value": did
-							},
-							{
-								"name": "credentialSubject.firstNames",
-								"value": props.location.state.data.firstNames
-                            },
-                            {
-								"name": "credentialSubject.lastName",
+								"name": "Nom",
 								"value": props.location.state.data.lastName
 							},
-                            {
-								"name": "credentialSubject.gender",
-								"value": props.location.state.data.gender
+							{
+								"name": "Prénom",
+								"value": props.location.state.data.firstNames
 							},
                             {
-								"name": "credentialSubject.birthplace",
-								"value": props.location.state.data.birthplace
-							},
-                            {
-								"name": "credentialSubject.birthDate",
+								"name": "Date de naissance",
 								"value": props.location.state.data.birthDate
 							},
+							{
+								"name": "Nom du parent 1",
+								"value": props.location.state.data.parent1FullName
+                            },
+                            {
+								"name": "Nom du parent 2",
+								"value": props.location.state.data.parent2FullName
+							},
+							{
+								"name": "Photo",
+								"value": props.location.state.data.photo
+                            },
+                            {
+								"name": "Date d'émission",
+								"value": props.location.state.data.issuanceDate
+							},
+                            {
+								"name": "Date d'expiration",
+								"value": props.location.state.data.expirationDate
+							},
+                            {
+								"name": "Niveau d'identification",
+								"value": props.location.state.data.identificationLevel.toString()
+							},
+							/*
                             {
 								"name": "credentialSubject.fatherFullName",
 								"value": props.location.state.data.fatherFullName
@@ -173,17 +178,17 @@ function QRIQNIdentiteContainer(props) {
 								"name": "credentialSubject.registrationNumber",
 								"value": props.location.state.data.registrationNumber
                             },
-                            /*, 
+                            
                             {
                                 "description": "Photo du holder de l'attestation: " + props.location.state.data.photoName,
                                 "name": "credentialSubject.photo", 
                                 "mime-type" : props.location.state.data.photoMime, 
                                 "value" : props.location.state.data.photo
-							}*/
+							},
                             {
 								"name": "credentialSubject.photo",
 								"value": props.location.state.data.photo
-                            }
+                            }*/
 						]
 					}, 
 					"comment"       : "Émission d'attestation d'Identité IQN"

@@ -42,7 +42,7 @@ const IQNIdentiteForm = () => {
   const [lastName, setLastName]                     = useState('Courcy');
   const [birthDate, setBirthDate]                   = useState('1976-11-08');
   const [parent1FullName, setParent1FullName]         = useState('Marie Courcy');
-  const [parent2FullName, setMotherFullName]         = useState('inconnu');
+  const [parent2FullName, setParent2FullName]         = useState('inconnu');
   
   const [selectedFile, setSelectedFile]             = useState('');
   const [photoPreview, setPhotoPreview]             = useState('');
@@ -151,9 +151,10 @@ const IQNIdentiteForm = () => {
                 firstNames         : firstNames, 
                 lastName           : lastName, 
                 birthDate          : birthDate, 
-                fatherFullName     : parent1FullName, 
-                motherFullName     : parent2FullName, 
-                photo              : selectedFile
+                parent1FullName     : parent1FullName, 
+                parent2FullName     : parent2FullName, 
+                photo              : selectedFile,
+                identificationLevel: identificationLevel
               },
               invitation: data
             } 
@@ -179,13 +180,13 @@ const IQNIdentiteForm = () => {
      
       if(target === 'Vous' || target === 'Yourself'){
         setFirstNames('Sarah'); 
-        setMotherFullName('Marie Courcy'); 
+        setParent2FullName('Marie Courcy'); 
         setParent1FullName('Mathieu Courcy'); 
         setBirthDate('1976-11-08'); 
         setIssuanceDate('2019-07-17');
       } else {
         setFirstNames('Alice'); 
-        setMotherFullName('Sarah Courcy'); 
+        setParent2FullName('Sarah Courcy'); 
         setParent1FullName('Michel Courcy'); 
         setBirthDate('2020-12-22'); 
         setIssuanceDate('2020-12-22');
@@ -216,7 +217,7 @@ const IQNIdentiteForm = () => {
       </FormGroup>
       <FormGroup>
         <Label for="motherFullName">{t('identite:credentialSubject.parent2FullName')}: *</Label>
-        <Input type="text" className="inputField rounded-pill" name="parent2FullName" id="parent2FullName" onChange={(e) => setMotherFullName(e.target.value)} placeholder={t('identite:credentialSubject.parent2FullName')} value={parent2FullName} />
+        <Input type="text" className="inputField rounded-pill" name="parent2FullName" id="parent2FullName" onChange={(e) => setParent2FullName(e.target.value)} placeholder={t('identite:credentialSubject.parent2FullName')} value={parent2FullName} />
       </FormGroup>
       <FormGroup>
         <Label for="issuanceDate">{t('identite:issuanceDate')}: *</Label>
