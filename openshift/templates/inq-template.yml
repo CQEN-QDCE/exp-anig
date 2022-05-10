@@ -269,7 +269,7 @@ objects:
                 --wallet-storage-creds "$(eval echo \"${KMS_STORAGE_CREDENTIALS}\")"
                 $([ ! -z "${AGENT_DID_SEED}" ] && echo "--seed ${AGENT_DID_SEED}" || echo "")
                 $([ ! -z "${AGENT_ADMIN_API_KEY}" ] && echo "--admin-api-key ${AGENT_ADMIN_API_KEY}" || echo "--admin-insecure-mode")
-                --label '${AGENT_NAME}'
+                $([ ! -z "${AGENT_NAME}" ] && echo "--label \"${AGENT_NAME}\"" || echo "")
                 --log-level ${AGENT_LOG_LEVEL});
             env:
               - name: GENESIS_FILE_URL
@@ -675,7 +675,7 @@ parameters:
   displayName: Agent name
   description: The name of the agent.
   required: true
-  value: "Directeur-État-Civil"
+  value: "Gouvernement_du_Québec"
 - name: AGENT_HTTP_PORT
   displayName: Agent http port
   description: The http port on which the service will listen.
@@ -685,7 +685,7 @@ parameters:
   displayName: Identity schema name
   description: The name of the identity schema.
   required: true
-  value: "IQNIDENTITE"
+  value: "Attestation numérique d'identité gouvernemental (EXP)"
 - name: IDENTITY_SCHEMA_VERSION
   displayName: Identity schema version
   description: The version of the identity schema.
@@ -695,7 +695,7 @@ parameters:
   displayName: Credential definition identity
   description: The credential definition of the identity.
   required: true
-  value: "Ep31SvFAetugFPe5CGzJxt:3:CL:50:Identite-IQN"
+  value: "Ep31SvFAetugFPe5CGzJxt:3:CL:25954:Attestation numérique d'identité gouvernemental (EXP)"
 - name: AGENT_ENDPOINT
   displayName: Agent endpoint
   description: The endpoint of the agent.
