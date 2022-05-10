@@ -4,11 +4,15 @@ import Routes from './navigation/Routes';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 import './i18n';
+import { ThemeProvider } from '@material-ui/core';
+import Theme from './assets/styles/Theme';
 
 ReactDOM.render(
   <Suspense fallback={null}>
     <React.StrictMode>
-      <Routes />
+      <ThemeProvider theme={Theme}>
+        <Routes />
+      </ThemeProvider>
     </React.StrictMode>
   </Suspense>,
 

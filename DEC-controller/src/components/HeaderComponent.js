@@ -15,6 +15,7 @@ import useWindowDimensions            from '../helpers/useWindowDimensions';
 import QuebecLogo                     from '../assets/images/logoQuebec.png';
 import LoginIcon                      from '@material-ui/icons/AccountCircle';
 import LogoutIcon                     from '@material-ui/icons/ExitToApp';
+import "../assets/styles/Theme.js";
 
 const HeaderComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,7 +61,7 @@ const HeaderComponent = () => {
             </NavItem>
           ) : (
               <NavItem>
-                 <Button startIcon={<LoginIcon />} color="primary" variant="contained" onClick={handleLogin} >
+                 <Button startIcon={<LoginIcon />} outline color="primary" variant="contained" onClick={handleLogin} >
                       {t('translation:btnLogin')}
                   </Button> 
               </NavItem>
