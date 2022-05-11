@@ -269,9 +269,10 @@ objects:
                 --wallet-storage-creds "$(eval echo \"${KMS_STORAGE_CREDENTIALS}\")"
                 $([ ! -z "${AGENT_DID_SEED}" ] && echo "--seed ${AGENT_DID_SEED}" || echo "")
                 $([ ! -z "${AGENT_ADMIN_API_KEY}" ] && echo "--admin-api-key ${AGENT_ADMIN_API_KEY}" || echo "--admin-insecure-mode")
-                $([ ! -z "${AGENT_NAME}" ] && echo "--label \"${AGENT_NAME}\"" || echo "")
                 --log-level ${AGENT_LOG_LEVEL});
             env:
+              - name: ACAPY_LABEL
+                value: "Gouvernement du Québec"
               - name: GENESIS_FILE_URL
                 value: ${GENESIS_FILE_URL}
               - name: KMS_NAME
@@ -342,26 +343,14 @@ objects:
                 protocol: TCP
               - containerPort: 8000
                 protocol: TCP
-            readinessProbe:
-              timeoutSeconds: 30
-              initialDelaySeconds: 3
-              exec:
-                command:
-                  - bash
-                  - "-c"
-                  - 'curl --fail "http://localhost:${ADMIN_INTERFACE_PORT}/status/ready" -H "X-API-KEY: ${AGENT_ADMIN_API_KEY}"'
-            livenessProbe:
-              timeoutSeconds: 30
-              initialDelaySeconds: 300
-              exec:
-                command:
-                  - bash
-                  - "-c"
-                  - 'curl --fail "http://localhost:${ADMIN_INTERFACE_PORT}/status/live" -H "X-API-KEY: ${AGENT_ADMIN_API_KEY}"'
             resources: {}
             terminationMessagePath: /dev/termination-log
             terminationMessagePolicy: File
             imagePullPolicy: Always
+        initContainers:
+        - name: init-kms
+          image: busybox
+          command: ['sh', '-c', 'until nc -z inq-kms:5432; do echo waiting for db; sleep 2; done;']
         restartPolicy: Always
         terminationGracePeriodSeconds: 30
         dnsPolicy: ClusterFirst
@@ -695,7 +684,7 @@ parameters:
   displayName: Credential definition identity
   description: The credential definition of the identity.
   required: true
-  value: "Ep31SvFAetugFPe5CGzJxt:3:CL:25954:Attestation numérique d'identité gouvernemental (EXP)"
+  value: "Ep31SvFAetugFPe5CGzJxt:3:CL:25954:Attestation numérique d'identité gouvernemental (EXP-INQ)"
 - name: AGENT_ENDPOINT
   displayName: Agent endpoint
   description: The endpoint of the agent.
