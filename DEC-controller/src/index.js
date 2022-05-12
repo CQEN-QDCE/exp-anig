@@ -3,16 +3,14 @@ import ReactDOM from 'react-dom';
 import Routes from './navigation/Routes';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
+import './assets/styles/global.css'
 import './i18n';
-import { ThemeProvider } from '@material-ui/core';
-import Theme from './assets/styles/Theme';
+
 
 ReactDOM.render(
   <Suspense fallback={null}>
     <React.StrictMode>
-      <ThemeProvider theme={Theme}>
-        <Routes />
-      </ThemeProvider>
+      <Routes />
     </React.StrictMode>
   </Suspense>,
 

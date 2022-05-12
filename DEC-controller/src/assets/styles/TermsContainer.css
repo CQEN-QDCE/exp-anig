@@ -28,6 +28,8 @@
 
 .justifyText {
   text-align: justify;
+  color: #576368;
+  font-size: medium;
 }
 
 .inputField[type="email"]:hover {
