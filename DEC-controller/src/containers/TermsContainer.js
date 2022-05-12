@@ -7,8 +7,9 @@
 import React, { useState } from 'react';
 import { Button, Label, Col, FormGroup, Form, InputGroup, Input, Container, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import Auth                from '../helpers/Auth';
-import { useTranslation }  from 'react-i18next' 
-import '../assets/styles/TermsContainer.css'
+import { useTranslation }  from 'react-i18next' ;
+import '../assets/styles/TermsContainer.css';
+import '../assets/styles/global.css';
 
 function TermsContainer(props) {
 
@@ -35,12 +36,11 @@ function TermsContainer(props) {
 	}
 
 	return (
-		<div className="Root" style={{ backgroundColor: '#FCF8F7' }}>
-
+		<div className="Root">
 			<Container className="App" >
 				<Form className="form">
 					<h3 className="text-center">{t('translation:terms')}</h3>
-					<p className="justifyText" style={{ fontSize: '12px' }}>
+					<p className="justifyText">
 						{t('translation:termsMsgPara1')} 
 						<br/>
 						<br/>
@@ -52,26 +52,25 @@ function TermsContainer(props) {
 						<br/>
 						{t('translation:termsMsgPara4')} 
 						<br/>
-						<span className="text-center"style={{fontWeight: 'bold'}}>
+						<span className="text-center" style={{fontWeight: 'bold'}}>
 							{t('translation:email')} 
 						</span>
 						<br/>
 					</p>
 					<h3 className="text-center">{t('translation:termsMsgSubTitle')}</h3>
-					<p className="justifyText" style={{ fontSize: '12px' }}>
+					<p className="justifyText">
 					{t('translation:termsMsgPara5')} 
 					</p>
-					
-					<Col>
-						<FormGroup>
-							<label className="text-justify align-center">
-								<input className="m-1" type="checkbox" checked={checkBox} onChange={handleChange}/>
-								{t('translation:termsCheckBoxMsg')}
-							</label>
-						</FormGroup>
-					</Col>
-					<div className="text-center ">
-						<Button className="mt-2" disabled={!checkBox} outline color="primary" size="lg" onClick={handleSubmit}>{t('translation:termsBtn')}</Button>
+					<div className="next-step-container ">
+						<Col>
+							<FormGroup>
+								<label className="text-justify align-center">
+									<input className="m-1" type="checkbox" checked={checkBox} onChange={handleChange}/>
+									{t('translation:termsCheckBoxMsg')}
+								</label>
+							</FormGroup>
+						</Col>
+						<Button className="mt-2 primary-btn-qc" disabled={!checkBox} outline color="primary" size="lg" onClick={handleSubmit}>{t('translation:termsBtn')}</Button>
 					</div>
 				</Form>
 			</Container>

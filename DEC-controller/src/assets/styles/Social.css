@@ -30,7 +30,5 @@
     color: black;
   }
   .lang {
-    position: absolute;
-    right: 20px;
-    bottom: 10px;
+    display: inline;
   }

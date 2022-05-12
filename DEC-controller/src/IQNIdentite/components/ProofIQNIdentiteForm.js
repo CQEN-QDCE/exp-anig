@@ -14,12 +14,10 @@ export default function ProofIQNIdentiteForm(props) {
     expirationDate,
     firstNames,
     lastName, 
-    gender, 
-    birthplace, 
     birthDate, 
-    fatherFullName, 
-    motherFullName, 
-    registrationNumber
+    parent1FullName, 
+    parent2FullName, 
+    identificationLevel
   } = props.data.data
 
   const { t } = useTranslation(['translation', 'identite']);
@@ -44,23 +42,6 @@ export default function ProofIQNIdentiteForm(props) {
         </Col>
       </FormGroup>
       <FormGroup row>
-        <Label for="gender" sm={3}>
-        {t('identite:credentialSubject.gender')}
-        </Label>
-        <Col sm={10}>
-          <Input type="text" name="gender" id="gender" value={gender} disabled />
-        </Col>
-      </FormGroup>
-     
-      <FormGroup row>
-        <Label for="birthplace" sm={3}>
-        {t('identite:credentialSubject.birthplace')}
-        </Label>
-        <Col sm={10}>
-          <Input type="text" name="birthplace" id="birthplace" value={birthplace} disabled />
-        </Col>
-      </FormGroup>
-      <FormGroup row>
         <Label for="birthDate" sm={3}>
         {t('identite:credentialSubject.birthDate')}
         </Label>
@@ -69,35 +50,27 @@ export default function ProofIQNIdentiteForm(props) {
         </Col>
       </FormGroup>
       <FormGroup row>
-        <Label for="fatherFullName" sm={3}>
-        {t('identite:credentialSubject.fatherFullName')}
+        <Label for="parent1FullName" sm={3}>
+        {t('identite:credentialSubject.parent1FullName')}
         </Label>
         <Col sm={10}>
-          <Input type="text" name="fatherFullName" id="fatherFullName" value={fatherFullName} disabled />
+          <Input type="text" name="parent1FullName" id="parent1FullName" value={parent1FullName} disabled />
         </Col>
       </FormGroup>
       <FormGroup row>
-        <Label for="motherFullName" sm={3}>
-        {t('identite:credentialSubject.motherFullName')}
+        <Label for="parent2FullName" sm={3}>
+        {t('identite:credentialSubject.parent2FullName')}
         </Label>
         <Col sm={10}>
-          <Input type="text" name="motherFullName" id="motherFullName" value={motherFullName} disabled />
+          <Input type="text" name="parent2FullName" id="parent2FullName" value={parent2FullName} disabled />
         </Col>
       </FormGroup>
       <FormGroup row>
-        <Label for="registrationNumber" sm={3}>
-        {t('identite:credentialSubject.registrationNumber')}
+        <Label for="identificationLevel" sm={3}>
+        {t('identite:credentialSubject.identificationLevel')}
         </Label>
         <Col sm={10}>
-          <Input type="text" name="registrationNumber" id="registrationNumber" value={registrationNumber} disabled />
-        </Col>
-      </FormGroup>
-      <FormGroup row>
-        <Label for="id" sm={3}>
-        {t('identite:credentialSubject.id')}
-        </Label>
-        <Col sm={10}>
-          <Input type="text" name="id" id="id" value={id} disabled />
+          <Input type="text" name="identificationLevel" id="identificationLevel" value={identificationLevel} disabled />
         </Col>
       </FormGroup>
       <FormGroup row>

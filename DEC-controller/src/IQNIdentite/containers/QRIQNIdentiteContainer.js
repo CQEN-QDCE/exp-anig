@@ -6,13 +6,14 @@
 * Ref: https://github.com/hyperledger/aries-rfcs/blob/master/features/0160-connection-protocol/README.md
 */
 import React, { useState, useEffect }      from 'react'
-import { Container, Button, Col, Modal, ModalHeader, ModalBody, ModalFooter, Spinner } from 'reactstrap'
+import { Container, Button, Col, Modal, ModalHeader, ModalBody, ModalFooter, Spinner, Form } from 'reactstrap'
 import QRComponent                         from '../../components/QRComponent'
 import { useTranslation }                  from 'react-i18next'
 import { GET_API_SECRET }                  from '../../config/constants'
 import { GET_ISSUER_HOST_URL }             from '../../config/endpoints'
 import { fetchWithTimeout }                from '../../helpers/fetchWithTimeout'
 import '../../assets/styles/TermsContainer.css'
+import '../../'
 
 function QRIQNIdentiteContainer(props) {
 
@@ -26,7 +27,6 @@ function QRIQNIdentiteContainer(props) {
 
 	const [modal, setModal]                = useState(false);
 	const [show, setShow]                  = useState(false);
-	const [showAuthButton, setAuthButton]  = useState(false);
 	const [showLoader, setLoader]          = useState(false)
 	const [did, setDid]                    = useState('')
 
@@ -73,7 +73,8 @@ function QRIQNIdentiteContainer(props) {
 		console.log("DID: ============> " + did) */
 		setDid(did); 
 		clearInterval(intervalFunction);
-		setAuthButton(true);
+		setLoader(true);
+		issueCredential();
 	}
 
 	function issueCredential() {
@@ -104,31 +105,6 @@ function QRIQNIdentiteContainer(props) {
 					"credential_proposal": {
 						"@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/credential-preview",
 						"attributes": [
-							/*{
-								"name": "@context",
-								"value": "https://www.w3.org/2018/credentials/v1, https:// vonx.pocquebec.org /2020/credentials/sqin/exp/delegation/v1"
-							},
-							{
-								"name": "id",
-								"value": "http://cqen.gouv.qc.ca/schema/v1/identite-iqn.json"
-							},
-							{
-								"name": "type",
-								"value": "VerifiableCrendetial, IdentityCredential"
-							},
-							{
-								"name": "issuer",
-								"value": "http://iqn.cqen.gouv.qc.ca"
-                            },
-                            {
-								"name": "holder.id",
-								"value": ""
-							},
-							{
-								"name": "holder.type",
-								"value": ""
-                            }, */
-
 							{
 								"name": "Nom",
 								"value": props.location.state.data.lastName
@@ -165,30 +141,6 @@ function QRIQNIdentiteContainer(props) {
 								"name": "Niveau d'identification",
 								"value": props.location.state.data.identificationLevel.toString()
 							},
-							/*
-                            {
-								"name": "credentialSubject.fatherFullName",
-								"value": props.location.state.data.fatherFullName
-							},
-                            {
-								"name": "credentialSubject.motherFullName",
-								"value": props.location.state.data.motherFullName
-							},
-                            {
-								"name": "credentialSubject.registrationNumber",
-								"value": props.location.state.data.registrationNumber
-                            },
-                            
-                            {
-                                "description": "Photo du holder de l'attestation: " + props.location.state.data.photoName,
-                                "name": "credentialSubject.photo", 
-                                "mime-type" : props.location.state.data.photoMime, 
-                                "value" : props.location.state.data.photo
-							},
-                            {
-								"name": "credentialSubject.photo",
-								"value": props.location.state.data.photo
-                            }*/
 						]
 					}, 
 					"comment"       : "Émission d'attestation d'Identité IQN"
@@ -216,22 +168,19 @@ function QRIQNIdentiteContainer(props) {
 		handleClose();
 		props.history.replace('/iqnidentite');
     }
-    
-	const handleAuthorisation = () => {
-		setLoader(true);
-		issueCredential();
-	}
 
 	return (
-		<div className="Root" style={{ backgroundColor: '#FCF8F7', display: "flex" }}>
-			<Container >
-				<Col>
-					<QRComponent value={JSON.stringify(props.location.state)} />
-				</Col>
-				<Col className="mt-3">
-					{showAuthButton && !showLoader ?
-						<Button outline color="primary" onClick={handleAuthorisation}>{t('identite:btnAuthorizeIdentity')}</Button> : showLoader ? <Spinner /> : null}
-				</Col>
+		<div className="Root" style={{ display: "flex" }}>
+			<Container className='App '>
+				<div className='form'>
+					<p className='h3'>{t('identite:connectIssuer')}</p>
+					<div className='text-center'>
+						<p>{t('identite:connectIssuerExplanation')}</p>
+						<Col>
+							<QRComponent value={JSON.stringify(props.location.state)} />
+						</Col>
+					</div>
+				</div>
 
 				<div>
 					<Modal isOpen={modal} toggle={toggle}
@@ -242,7 +191,7 @@ function QRIQNIdentiteContainer(props) {
 						<ModalHeader toggle={toggle} closeButton>{t('identite:IQNIdentity')}</ModalHeader>
                         <ModalBody>{t('identite:msgIdentityIssued')}</ModalBody>
 						<ModalFooter>
-							<Button color="primary" onClick={issued}>{t('identite:ok')}</Button>{' '}
+							<Button color="secondary" onClick={issued}>{t('identite:ok')}</Button>{' '}
 						</ModalFooter>
 					</Modal>
 				</div>

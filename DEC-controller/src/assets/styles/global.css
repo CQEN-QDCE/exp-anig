@@ -1,0 +1,42 @@
+.next-step-container {
+    display: flex;
+    width: 100%;
+    border-top: 1px solid '#808A9D';
+    justify-content: flex-end;
+    padding-top: 1em;
+}
+
+.primary-btn-qc {
+    color:#095797 !important;
+    border-color: #095797 !important;
+}
+
+.primary-btn-qc:disabled {
+    color:#095797 !important;
+    border-color: #095797 !important;
+    opacity: 0.6;
+}
+
+.primary-btn-qc:disabled:hover {
+    color:#095797 !important;
+    border-color: #095797 !important;
+    background-color: white !important;
+    opacity: 0.6;
+}
+
+.primary-btn-qc:hover {
+    color: white !important;
+    border-color: #095797 !important;
+    background-color: #095797 !important;
+}
+
+.secondary-btn-qc {
+    color:#CB381F !important;
+    border-color: #CB381F !important;
+}
+
+.secondary-btn-qc:hover {
+    color: white !important;
+    border-color: #CB381F !important;
+    background-color: #CB381F !important;
+}

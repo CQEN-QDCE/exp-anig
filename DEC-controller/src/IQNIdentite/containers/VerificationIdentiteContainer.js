@@ -69,9 +69,10 @@ function VerificationIdentiteContainer(props) {
     }
  
     return (
-        <Container className="mt-5 pt-5">
-            <br /><br /><br /><br />
-            <div className="text-center FormBox mt-5 pt-5">
+		<div className="Root" style={{ display: "flex" }}>
+		<Container className='App '>
+			<div className='form'>
+            <div className="text-center">
                 <h3 className="mb-5 pb-4 mt-2 header"> {t('identite:msgIssuance1')} </h3>
                 <br />
                 <p>
@@ -84,7 +85,9 @@ function VerificationIdentiteContainer(props) {
                 <Spinner /> 
                 
             </div>
+			</div>
         </Container>
+		</div>
     );
 }
 

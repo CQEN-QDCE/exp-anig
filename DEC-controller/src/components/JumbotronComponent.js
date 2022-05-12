@@ -4,12 +4,19 @@
 * SPDX-License-Identifier: LiLiQ-R-v.1.1
 * License-Filename: /LICENSE
 */
-import React               from 'react'
-import { useTranslation }  from 'react-i18next'
-import '../assets/styles/JumbotronComponent.css'
+import React               from 'react';
+import { Button } from 'reactstrap';
+import { useTranslation }  from 'react-i18next';
+import { useHistory }    from 'react-router-dom';
+import '../assets/styles/JumbotronComponent.css';
 
 const JumbotronComponent = () => {
   const { t } = useTranslation();
+  const history = useHistory();
+
+  const handleLogin = () => {
+    history.push('/terms');
+  };
   return (
     <header>
       <div className="pt-5 container-fluid text-center" >
@@ -20,6 +27,9 @@ const JumbotronComponent = () => {
             <p className="lead">
               {t('translation:welcomeMessage')}
             </p>
+            <Button outline color="primary" className='primary-btn-qc' variant="contained" onClick={handleLogin} >
+                {t('translation:btnLogin')}
+            </Button> 
           </div>
         </div>
       </div>

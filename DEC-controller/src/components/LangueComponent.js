@@ -22,13 +22,13 @@ function LangueComponent(){
     
     return(
         <div className="lang">
-            
+            <div>
                 <img src={enflag} onClick={() => changeLanguage('en')} alt="en" width="40" height="40" />  
-           
+
                 { /* <img src={brFlag} onClick={() => changeLanguage('pt')} alt="pt" width="40" height="40" /> */}
-           
+
                 <img src={frFlag} onClick={() => changeLanguage('fr')} alt="fr" width="40" height="40" /> 
-           
+            </div>           
         </div>
     ); 
         
