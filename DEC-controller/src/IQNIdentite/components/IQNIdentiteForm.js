@@ -13,6 +13,7 @@ import { GET_API_SECRET }       from '../../config/constants'
 import { GET_ISSUER_HOST_URL }  from '../../config/endpoints'
 import UploadIcon from '@material-ui/icons/CloudUpload';
 import '../../assets/styles/Forms.css'
+import '../../assets/styles/global.css'
 
 const IQNIdentiteForm = () => {
 
@@ -199,61 +200,59 @@ const IQNIdentiteForm = () => {
       <br />
       <FormGroup>
         <Label for="firstNames">{t('identite:credentialSubject.firstNames')}: *</Label>
-        <Input type="text" className="inputField rounded-pill" name="firstNames" id="firstNames" onChange={(e) => setFirstNames(e.target.value)} placeholder={t('identite:credentialSubject.firstNames')} value={firstNames} />
+        <Input type="text" className="inputField rounded" name="firstNames" id="firstNames" onChange={(e) => setFirstNames(e.target.value)} placeholder={t('identite:credentialSubject.firstNames')} value={firstNames} />
       </FormGroup>
     
       <FormGroup>
         <Label for="lastName">{t('identite:credentialSubject.lastName')}: *</Label>
-        <Input type="text" className="inputField rounded-pill" name="lastName" id="lastName" onChange={(e) => setLastName(e.target.value)} placeholder={t('identite:credentialSubject.lastName')} value={lastName} />
+        <Input type="text" className="inputField rounded" name="lastName" id="lastName" onChange={(e) => setLastName(e.target.value)} placeholder={t('identite:credentialSubject.lastName')} value={lastName} />
       </FormGroup>
     
       <FormGroup>
         <Label for="birthDate">{t('identite:credentialSubject.birthDate')}: *</Label>
-        <Input type="date" className="inputField rounded-pill" name="birthDate" id="birthDate" onChange={(e) => setBirthDate(e.target.value)} placeholder={t('identite:credentialSubject.birthDate')} value={birthDate} />
+        <Input type="date" className="inputField rounded" name="birthDate" id="birthDate" onChange={(e) => setBirthDate(e.target.value)} placeholder={t('identite:credentialSubject.birthDate')} value={birthDate} />
       </FormGroup>
       <FormGroup>
         <Label for="fatherFullName">{t('identite:credentialSubject.parent1FullName')}: *</Label>
-        <Input type="text" className="inputField rounded-pill" name="parent1FullName" id="parent1FullName" onChange={(e) => setParent1FullName(e.target.value)} placeholder={t('identite:credentialSubject.parent1FullName')} value={parent1FullName} />
+        <Input type="text" className="inputField rounded" name="parent1FullName" id="parent1FullName" onChange={(e) => setParent1FullName(e.target.value)} placeholder={t('identite:credentialSubject.parent1FullName')} value={parent1FullName} />
       </FormGroup>
       <FormGroup>
         <Label for="motherFullName">{t('identite:credentialSubject.parent2FullName')}: *</Label>
-        <Input type="text" className="inputField rounded-pill" name="parent2FullName" id="parent2FullName" onChange={(e) => setParent2FullName(e.target.value)} placeholder={t('identite:credentialSubject.parent2FullName')} value={parent2FullName} />
+        <Input type="text" className="inputField rounded" name="parent2FullName" id="parent2FullName" onChange={(e) => setParent2FullName(e.target.value)} placeholder={t('identite:credentialSubject.parent2FullName')} value={parent2FullName} />
       </FormGroup>
       <FormGroup>
         <Label for="issuanceDate">{t('identite:issuanceDate')}: *</Label>
-        <Input type="date" disabled className="inputField rounded-pill" name="issuanceDate" id="issuanceDate" onChange={(e) => setIssuanceDate(e.target.value)} placeholder={t('identite:issuanceDate')} value={issuanceDate} />
+        <Input type="date" disabled className="inputField rounded" name="issuanceDate" id="issuanceDate" onChange={(e) => setIssuanceDate(e.target.value)} placeholder={t('identite:issuanceDate')} value={issuanceDate} />
       </FormGroup>
       <FormGroup>
         <Label for="expirationDate">{t('identite:expirationDate')}: *</Label>
-        <Input type="date" className="inputField rounded-pill" name="expirationDate" id="expirationDate" onChange={(e) => setExpirationDate(e.target.value)} placeholder={t('identite:expirationDate')} value={expirationDate} />
+        <Input type="date" className="inputField rounded" name="expirationDate" id="expirationDate" onChange={(e) => setExpirationDate(e.target.value)} placeholder={t('identite:expirationDate')} value={expirationDate} />
       </FormGroup>
       <FormGroup>
         <Label for="identificationLevel">{t('identite:credentialSubject.identificationLevel')}: *</Label>
-        <Input type="number" max={3} min={1} className="inputField rounded-pill" name="identificationLevel" id="identificationLevel" onChange={(e) => validateIdentificationLevel(e.target.value)} placeholder={t('identite:credentialSubject.identificationLevel')} value={identificationLevel} />
+        <Input type="number" max={3} min={1} className="inputField rounded" name="identificationLevel" id="identificationLevel" onChange={(e) => validateIdentificationLevel(e.target.value)} placeholder={t('identite:credentialSubject.identificationLevel')} value={identificationLevel} />
       </FormGroup>
 
 
      
      
       <FormGroup>
-          <Label for="photo">Photo</Label>
+          <Label for="photo">Photo: *</Label>
           <Input type="file" className="inputField" name="photo" id="photo" onChange={handleFiles} placeholder="Photo" />
   
           <img src={photoPreview} id="photoImage" width="200" />
       </FormGroup>
 
+      <div className='next-step-container'>
+        <Button onClick={handleRequest} className='primary-btn-qc m-3' outline color="primary">{t('identite:btnIssue')}</Button>
+      </div>
 
-      <Button onClick={handleRequest} outline color="primary" className="m-3">{t('identite:btnIssue')}</Button>
-      <br />
-      <br />
-      <br />
-      <br />
       <div>
         <Modal isOpen={modal} toggle={toggle} centered>
           <ModalHeader toggle={toggle}>{t('identite:IQNIdentity')}</ModalHeader>
           <ModalBody>{t('identite:modalMessage')}</ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={toggle}>{t('identite:ok')}</Button>{' '}
+            <Button color="primary" className='primary-btn-qc' outline onClick={toggle}>{t('identite:ok')}</Button>{' '}
           </ModalFooter>
         </Modal>
       </div>

@@ -5,15 +5,14 @@
 * License-Filename: /LICENSE
 */
 import React, { useState, useEffect } from 'react';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem } from 'reactstrap';
-import { Button }                     from '@material-ui/core'
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, Button } from 'reactstrap';
+
 import { useHistory, useLocation }    from 'react-router-dom';
 import { useTranslation }             from 'react-i18next'
 import { globalStyles }               from '../assets/styles/globalStyles';
 import Auth                           from '../helpers/Auth';
 import useWindowDimensions            from '../helpers/useWindowDimensions';
 import QuebecLogo                     from '../assets/images/logoQuebec.png';
-import LoginIcon                      from '@material-ui/icons/AccountCircle';
 import LogoutIcon                     from '@material-ui/icons/ExitToApp';
 
 const HeaderComponent = () => {
@@ -30,18 +29,14 @@ const HeaderComponent = () => {
     setIsOpen(false);
   }, [location.pathname]);
 
-  const handleLogin = () => {
-    // history.push('/login');
-    history.push('/terms');
-  };
-
   const handleLogout = () => {
     Auth.signout();
     history.replace('/');
   };
 
   const handleClickLogo = () => {
-    window.location.href = "http://emetteur-dec-issuer.apps.exp.lab.pocquebec.org/";
+    Auth.signout();
+    history.replace('/');
   }
 
   return (
@@ -52,19 +47,11 @@ const HeaderComponent = () => {
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
         <Nav navbar className="ml-auto">
-          {Auth.getAuth() ? (
+          {Auth.getAuth() && (
             <NavItem>
-                <Button startIcon={<LogoutIcon />} color="secondary" variant="contained" onClick={handleLogout} >
-                    {t('translation:btnLogout')}
-                </Button>
+              <Button  onClick={handleLogout} className='secondary-btn-qc m-3' outline color="primary"> <LogoutIcon />{' '} {t('translation:btnLogout')}</Button>
             </NavItem>
-          ) : (
-              <NavItem>
-                 <Button startIcon={<LoginIcon />} color="primary" variant="contained" onClick={handleLogin} >
-                      {t('translation:btnLogin')}
-                  </Button> 
-              </NavItem>
-            )}
+          ) }
         </Nav>
       </Collapse>
     </Navbar>

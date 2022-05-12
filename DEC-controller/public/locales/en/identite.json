@@ -26,6 +26,8 @@
     "IQNIdentity": "IQN Identity",
     "modalMessage": "Fill out all fields, please.",
     "ok": "OK", 
+    "connectIssuer": "Connect with Issuer",
+    "connectIssuerExplanation": "Scan the QR code using a Trusted Digital Wallet to establish a connection with the Issuer. Once a connection is established, the credential issuance process will start automatically.",
     "btnAuthorizeIdentity": "Authorize IQN Identity issuance", 
     "msgIdentityIssued": "This IQN Identity was authorized and issued.", 
     "msgPending" : "Pending result!", 

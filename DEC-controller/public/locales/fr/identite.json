@@ -26,6 +26,8 @@
     "IQNIdentity": "Identité IQN",
     "modalMessage": "Merci de remplir tous les champs.",
     "ok": "OK", 
+    "connectIssuer": "Connecter avec l'émetteur",
+    "connectIssuerExplanation": "Scannez le code QR à l’aide d’un portefeuille numérique de confiance pour établir une connexion avec l’émetteur. Une fois qu’une connexion est établie, le processus d’émission des informations d’identification démarre automatiquement.",
     "btnAuthorizeIdentity": "Autoriser émission de l'Identité IQN",
     "msgIdentityIssued": "Cette Identité IQN a été autorisée et émise.", 
     "msgPending" : "En attente de réponse!", 

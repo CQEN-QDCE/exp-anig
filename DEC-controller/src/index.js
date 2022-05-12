@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import Routes from './navigation/Routes';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
+import './assets/styles/global.css'
 import './i18n';
+
 
 ReactDOM.render(
   <Suspense fallback={null}>

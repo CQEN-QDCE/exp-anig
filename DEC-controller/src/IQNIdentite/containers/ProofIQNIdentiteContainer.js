@@ -27,9 +27,6 @@ const ProofIQNIdentiteContainer = (props) => {
                 <p className="ml-md-5 pb-4 mt-2">
                 {t('identite:msgIssueSuccessCompl')}
                 </p>
-                <div className="text-center ">
-                <Button className="mt-2" outline color="primary" size="lg" onClick={() => window.open("http://mfa-controller.apps.exp.lab.pocquebec.org/", "_blank")} >{t('identite:btnVerifyCred')}</Button>
-                </div>
                 </Col>
             </Row>
         </Container>
