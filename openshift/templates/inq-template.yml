@@ -4,7 +4,7 @@ metadata:
   name: inq-demo-exp-att-del
   annotations:
     description: Site Web qui émet l'attestation pour les expérimentations d'une attestation délégué.
-    tags: cqen, experimentation, sqin, aries, dec, directeur de l'état civil, émetteur, attestation, délégué
+    tags: cqen, experimentation, sqin, aries, INQ
 objects:
 #inq-kms (PostgreSQL)
 - kind: Secret
