@@ -21,13 +21,6 @@ import Auth from '../helpers/Auth'
 import ImageHanderContainer from '../ImageHandling/containers/ImageHandlerContainer'
 import TermsContainer from '../containers/TermsContainer'
 
-
-
-const PrivateRoute = ({ component, ...options }) => {
-	const finalComponent = Auth.getAuth() ? component : NoAuthContainer;
-	return <Route {...options} component={finalComponent} />;
-  };
-
 function Routes() {
 	return (
 		<Router>
@@ -36,18 +29,18 @@ function Routes() {
 				<Switch>
 
 					{ /* Routes attestation DEC - IQN Identité */ }
-					<PrivateRoute path="/iqnidentite" component={IQNIdentiteContainer} />
-					<PrivateRoute path="/qriqnidentite" component={QRIQNIdentiteContainer} />
-					<PrivateRoute path="/verificationidentite" component={VerificationIdentiteContainer} />
-					<PrivateRoute path="/proofiqnidentite" component={ProofIQNIdentiteContainer} />
+					<Route path="/iqnidentite" component={IQNIdentiteContainer} />
+					<Route path="/qriqnidentite" component={QRIQNIdentiteContainer} />
+					<Route path="/verificationidentite" component={VerificationIdentiteContainer} />
+					<Route path="/proofiqnidentite" component={ProofIQNIdentiteContainer} />
 
 					{ /* Routes attestation DEC - Preuve d'identité */ }
-					<PrivateRoute path="/qriqnpreuve" component={QRIQNPreuveContainer} />
-					<PrivateRoute path="/verificationPreuve" component={VerificationPreuveContainer} />
-					<PrivateRoute path="/preuve" component={VerificationPreuveContainer} />
-					<PrivateRoute path="/emissionidentite" component={EmissionIdentiteContainer} />
+					<Route path="/qriqnpreuve" component={QRIQNPreuveContainer} />
+					<Route path="/verificationPreuve" component={VerificationPreuveContainer} />
+					<Route path="/preuve" component={VerificationPreuveContainer} />
+					<Route path="/emissionidentite" component={EmissionIdentiteContainer} />
 
-                    <PrivateRoute path="/imageHandler" component={ImageHanderContainer} /> 
+                    <Route path="/imageHandler" component={ImageHanderContainer} /> 
 
 					{ /* Routes de base de l'app */ }
 					<Route path="/noauth" component={NoAuthContainer} />

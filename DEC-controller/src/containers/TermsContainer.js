@@ -6,7 +6,6 @@
 */
 import React, { useState } from 'react';
 import { Button, Label, Col, FormGroup, Form, InputGroup, Input, Container, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import Auth                from '../helpers/Auth';
 import { useTranslation }  from 'react-i18next' ;
 import '../assets/styles/TermsContainer.css';
 import '../assets/styles/global.css';
@@ -23,7 +22,6 @@ function TermsContainer(props) {
 
 	const handleSubmit = () => {
 		if (checkBox) {
-			Auth.authenticate();
 			props.history.replace('/iqnidentite')
 		}
 		else {

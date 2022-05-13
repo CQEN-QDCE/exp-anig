@@ -48,3 +48,9 @@
     border-radius: .5em;
     box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
 }
+
+.instructions {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}

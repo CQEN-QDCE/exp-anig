@@ -17,7 +17,6 @@ import LogoutIcon                     from '@material-ui/icons/ExitToApp';
 
 const HeaderComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { height, width } = useWindowDimensions();
 
   const history = useHistory();
   const location = useLocation();
@@ -30,12 +29,10 @@ const HeaderComponent = () => {
   }, [location.pathname]);
 
   const handleLogout = () => {
-    Auth.signout();
     history.replace('/');
   };
 
   const handleClickLogo = () => {
-    Auth.signout();
     history.replace('/');
   }
 
@@ -45,15 +42,6 @@ const HeaderComponent = () => {
         <img src={QuebecLogo} alt="quebec-logo" onClick={handleClickLogo} style={globalStyles.navbarLogo} />
       </NavbarBrand>
       <NavbarToggler onClick={toggle} />
-      <Collapse isOpen={isOpen} navbar>
-        <Nav navbar className="ml-auto">
-          {Auth.getAuth() && (
-            <NavItem>
-              <Button  onClick={handleLogout} className='secondary-btn-qc m-3' outline color="primary"> <LogoutIcon />{' '} {t('translation:btnLogout')}</Button>
-            </NavItem>
-          ) }
-        </Nav>
-      </Collapse>
     </Navbar>
   );
 };

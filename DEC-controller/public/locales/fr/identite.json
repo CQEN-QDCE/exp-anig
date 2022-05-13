@@ -1,5 +1,6 @@
 {
     "digitalID": "Identité numérique",
+    "instructions": "Veuillez entrer vos informations",
     "id": "Identité", 
     "type": "Type",
     "issuer": "Émetteur", 
