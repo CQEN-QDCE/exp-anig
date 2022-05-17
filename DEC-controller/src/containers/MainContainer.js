@@ -11,7 +11,7 @@ import JumbotronComponent  from '../components/JumbotronComponent';
 function MainContainer() {
 	return (
 
-		< Container className='' fluid style={{ backgroundColor: '#FCF8F7' }}>
+		< Container fluid>
 			<JumbotronComponent />
 		</Container >
 	);

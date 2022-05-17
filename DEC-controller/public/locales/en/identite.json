@@ -1,5 +1,6 @@
 {
     "digitalID": "Digital Identity",
+    "instructions": "Please enter your information",
     "id": "Identity", 
     "type": "Type",
     "issuer": "Issuer", 

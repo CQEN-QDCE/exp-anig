@@ -196,8 +196,10 @@ const IQNIdentiteForm = () => {
 
   return (
     <Form className="text-center FormBox m-2">
-      <h1 className="mb-5 pb-4 mt-3 header">{t('identite:digitalID')}</h1>
-      <br />
+      <h1 className="mb-3 pb-4 mt-3 header">{t('identite:digitalID')}</h1>
+      <div className='instructions mb-2'>
+       <p className='h4'>{t('identite:instructions')}</p>
+      </div>
       <FormGroup>
         <Label for="firstNames">{t('identite:credentialSubject.firstNames')}: *</Label>
         <Input type="text" className="inputField rounded" name="firstNames" id="firstNames" onChange={(e) => setFirstNames(e.target.value)} placeholder={t('identite:credentialSubject.firstNames')} value={firstNames} />
