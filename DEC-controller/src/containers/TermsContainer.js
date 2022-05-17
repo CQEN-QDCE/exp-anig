@@ -42,7 +42,12 @@ function TermsContainer(props) {
 						{t('translation:termsMsgPara1')} 
 						<br/>
 						<br/>
-						{t('translation:termsMsgPara2')} 
+						<span>
+							{t('translation:termsMsgPara2-1')} 
+							<a style={{fontStyle: 'italic'}} href={t('translation:termsMsgPara2IssuerKitPath')}>{t('translation:termsMsgPara2IssuerKit')}</a>
+							{t('translation:termsMsgPara2-2')} 
+						</span>
+						
 						<br/>
 						<br/>
 						{t('translation:termsMsgPara3')} 
@@ -50,9 +55,6 @@ function TermsContainer(props) {
 						<br/>
 						{t('translation:termsMsgPara4')} 
 						<br/>
-						<span className="text-center" style={{fontWeight: 'bold'}}>
-							{t('translation:email')} 
-						</span>
 						<br/>
 					</p>
 					<h3 className="text-center">{t('translation:termsMsgSubTitle')}</h3>
