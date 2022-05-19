@@ -23,8 +23,13 @@ const JumbotronComponent = () => {
 
         <div className="row center-content" >
           <div className="col-md-7 col-sm-12">
-            <h1>Gouvernement du Québec</h1>
-            <p className="lead">
+           
+              
+            
+            <h1 style={{color: '#223654'}}>Gouvernement du Québec</h1>
+            <p className='h2 mt-4' style={{color: '#223654'}}>Preuve de concept</p>
+            
+            <p className="lead mt-5">
               {t('translation:welcomeMessage')}
             </p>
             <Button outline color="primary" className='primary-btn-qc' variant="contained" onClick={handleLogin} >

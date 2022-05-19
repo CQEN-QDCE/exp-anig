@@ -39,6 +39,7 @@ function TermsContainer(props) {
 				<Form className="form">
 					<h3 className="text-center">{t('translation:terms')}</h3>
 					<p className="justifyText">
+						<em style={{fontWeight: 'bold'}}>{t('translation:termsProofOfConcept')}</em>
 						{t('translation:termsMsgPara1')} 
 						<br/>
 						<br/>
