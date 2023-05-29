@@ -209,31 +209,6 @@ const IQNIdentiteForm = () => {
         <Label for="lastName">{t('identite:credentialSubject.lastName')}: *</Label>
         <Input type="text" className="inputField rounded" name="lastName" id="lastName" onChange={(e) => setLastName(e.target.value)} placeholder={t('identite:credentialSubject.lastName')} value={lastName} />
       </FormGroup>
-    
-      <FormGroup>
-        <Label for="birthDate">{t('identite:credentialSubject.birthDate')}: *</Label>
-        <Input type="date" className="inputField rounded" name="birthDate" id="birthDate" onChange={(e) => setBirthDate(e.target.value)} placeholder={t('identite:credentialSubject.birthDate')} value={birthDate} />
-      </FormGroup>
-      <FormGroup>
-        <Label for="fatherFullName">{t('identite:credentialSubject.parent1FullName')}: *</Label>
-        <Input type="text" className="inputField rounded" name="parent1FullName" id="parent1FullName" onChange={(e) => setParent1FullName(e.target.value)} placeholder={t('identite:credentialSubject.parent1FullName')} value={parent1FullName} />
-      </FormGroup>
-      <FormGroup>
-        <Label for="motherFullName">{t('identite:credentialSubject.parent2FullName')}: *</Label>
-        <Input type="text" className="inputField rounded" name="parent2FullName" id="parent2FullName" onChange={(e) => setParent2FullName(e.target.value)} placeholder={t('identite:credentialSubject.parent2FullName')} value={parent2FullName} />
-      </FormGroup>
-      <FormGroup>
-        <Label for="issuanceDate">{t('identite:issuanceDate')}: *</Label>
-        <Input type="date" disabled className="inputField rounded" name="issuanceDate" id="issuanceDate" onChange={(e) => setIssuanceDate(e.target.value)} placeholder={t('identite:issuanceDate')} value={issuanceDate} />
-      </FormGroup>
-      <FormGroup>
-        <Label for="expirationDate">{t('identite:expirationDate')}: *</Label>
-        <Input type="date" className="inputField rounded" name="expirationDate" id="expirationDate" onChange={(e) => setExpirationDate(e.target.value)} placeholder={t('identite:expirationDate')} value={expirationDate} />
-      </FormGroup>
-      <FormGroup>
-        <Label for="identificationLevel">{t('identite:credentialSubject.identificationLevel')}: *</Label>
-        <Input type="number" max={3} min={1} className="inputField rounded" name="identificationLevel" id="identificationLevel" onChange={(e) => validateIdentificationLevel(e.target.value)} placeholder={t('identite:credentialSubject.identificationLevel')} value={identificationLevel} />
-      </FormGroup>
       <div className='next-step-container'>
         <Button onClick={handleRequest} className='primary-btn-qc m-3' outline color="primary">{t('identite:btnIssue')}</Button>
       </div>

@@ -100,58 +100,14 @@ function EmissionIdentiteContainer(props){
 					"credential_proposal": {
 						"@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/credential-preview",
 						"attributes": [
-                            {
-								"name": "holder.id",
-								"value": holderId
-							},
-							{
-								"name": "holder.type",
-								"value": holderType
-                            },
-                            {
-								"name": "issuanceDate",
-								"value": props.location.state.data.issuanceDate
-							},
-							{
-								"name": "expirationDate",
-								"value": props.location.state.data.expirationDate
-                            },
-                            {
-								"name": "credentialSubject.id",
-								"value": props.location.state.data.did
-							},
-							{
+ 							{
 								"name": "credentialSubject.firstNames",
 								"value": props.location.state.data.firstNames
                             },
                             {
 								"name": "credentialSubject.lastName",
 								"value": props.location.state.data.lastName
-							},
-                            {
-								"name": "credentialSubject.gender",
-								"value": props.location.state.data.gender
-							},
-                            {
-								"name": "credentialSubject.birthplace",
-								"value": props.location.state.data.birthplace
-							},
-                            {
-								"name": "credentialSubject.birthDate",
-								"value": props.location.state.data.birthDate
-							},
-                            {
-								"name": "credentialSubject.fatherFullName",
-								"value": props.location.state.data.fatherFullName
-							},
-                            {
-								"name": "credentialSubject.motherFullName",
-								"value": props.location.state.data.motherFullName
-							},
-                            {
-								"name": "credentialSubject.registrationNumber",
-								"value": props.location.state.data.registrationNumber
-                            }
+							}
 						]
 					}, 
 					"comment" : "Émission d'attestation d'Identité ANIG"
