@@ -112,31 +112,7 @@ function QRIQNIdentiteContainer(props) {
 							{
 								"name": "Prénom",
 								"value": props.location.state.data.firstNames
-							},
-                            {
-								"name": "Date de naissance",
-								"value": props.location.state.data.birthDate
-							},
-							{
-								"name": "Nom du parent 1",
-								"value": props.location.state.data.parent1FullName
-                            },
-                            {
-								"name": "Nom du parent 2",
-								"value": props.location.state.data.parent2FullName
-							},
-                            {
-								"name": "Date d'émission",
-								"value": props.location.state.data.issuanceDate
-							},
-                            {
-								"name": "Date d'expiration",
-								"value": props.location.state.data.expirationDate
-							},
-                            {
-								"name": "Niveau d'identification",
-								"value": props.location.state.data.identificationLevel.toString()
-							},
+							}
 						]
 					}, 
 					"comment"       : "Émission d'attestation d'Identité ANIG"
