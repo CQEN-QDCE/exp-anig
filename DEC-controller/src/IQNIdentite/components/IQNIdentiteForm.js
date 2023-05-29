@@ -91,8 +91,7 @@ const IQNIdentiteForm = () => {
         expirationDate     === '' | 
         birthDate          === '' | 
         parent1FullName     === '' | 
-        parent2FullName     === '' | 
-        selectedFile       === '' ) {
+        parent2FullName     === '') {
       toggle();
     }
     else {
