@@ -234,17 +234,6 @@ const IQNIdentiteForm = () => {
         <Label for="identificationLevel">{t('identite:credentialSubject.identificationLevel')}: *</Label>
         <Input type="number" max={3} min={1} className="inputField rounded" name="identificationLevel" id="identificationLevel" onChange={(e) => validateIdentificationLevel(e.target.value)} placeholder={t('identite:credentialSubject.identificationLevel')} value={identificationLevel} />
       </FormGroup>
-
-
-     
-     
-      <FormGroup>
-          <Label for="photo">Photo: *</Label>
-          <Input type="file" className="inputField" name="photo" id="photo" onChange={handleFiles} placeholder="Photo" />
-  
-          <img src={photoPreview} id="photoImage" width="200" />
-      </FormGroup>
-
       <div className='next-step-container'>
         <Button onClick={handleRequest} className='primary-btn-qc m-3' outline color="primary">{t('identite:btnIssue')}</Button>
       </div>

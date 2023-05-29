@@ -125,10 +125,6 @@ function QRIQNIdentiteContainer(props) {
 								"name": "Nom du parent 2",
 								"value": props.location.state.data.parent2FullName
 							},
-							{
-								"name": "Photo",
-								"value": props.location.state.data.photo
-                            },
                             {
 								"name": "Date d'émission",
 								"value": props.location.state.data.issuanceDate
@@ -143,7 +139,7 @@ function QRIQNIdentiteContainer(props) {
 							},
 						]
 					}, 
-					"comment"       : "Émission d'attestation d'Identité IQN"
+					"comment"       : "Émission d'attestation d'Identité ANIG"
 				}),
 				headers: {
 					'HOST'          : `${GET_ISSUER_HOST_URL}`,

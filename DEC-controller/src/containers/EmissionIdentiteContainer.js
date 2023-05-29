@@ -17,7 +17,6 @@ function EmissionIdentiteContainer(props){
 	const schemaVersion                    = window.env && window.env.IDENTITY_SCHEMA_VERSION ? window.env.IDENTITY_SCHEMA_VERSION : process.env.REACT_APP_SCHEMA_VERSION_IDENTITE; 
 	const schemaCredDef                    = window.env && window.env.IDENTITY_CREDENTIAL_DEFINITION ? window.env.IDENTITY_CREDENTIAL_DEFINITION : process.env.REACT_APP_CRED_DEF_IDENTITE; 
 			
-	//console.log(props.location.state.data.photo)
 	// Variables du form 
 	const [id, setId]                                 = useState(props.location.state.data.id)
 	const [issuanceDate, seIssuanceDate]              = useState(props.location.state.data.issuanceDate)
@@ -30,7 +29,6 @@ function EmissionIdentiteContainer(props){
 	const [fatherFullName, setFatherFullName]         = useState(props.location.state.data.fatherFullName)
 	const [motherFullName, setMotherFullName]         = useState(props.location.state.data.motherFullName)
 	const [registrationNumber, setRegistrationNumber] = useState(props.location.state.data.registrationNumber)
-	const [photo, setPhoto]                           = useState(props.location.state.data.photo)
 	const [holderChoix, setHolderChoix]               = useState(props.location.state.data.holderChoix); 
 	
 	// Variables auxiliaires pour déterminer le holder
@@ -153,14 +151,10 @@ function EmissionIdentiteContainer(props){
                             {
 								"name": "credentialSubject.registrationNumber",
 								"value": props.location.state.data.registrationNumber
-                            }, 
-                            {
-								"name": "credentialSubject.photo",
-								"value": props.location.state.data.photo
                             }
 						]
 					}, 
-					"comment" : "Émission d'attestation d'Identité IQN"
+					"comment" : "Émission d'attestation d'Identité ANIG"
 				}),
 				headers: {
 					'HOST'         : `${GET_ISSUER_HOST_URL}`,
