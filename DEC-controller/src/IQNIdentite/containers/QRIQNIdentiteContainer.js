@@ -106,11 +106,11 @@ function QRIQNIdentiteContainer(props) {
 						"@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/credential-preview",
 						"attributes": [
 							{
-								"name": "Nom",
+								"name": "credentialSubject.lastName",
 								"value": props.location.state.data.lastName
 							},
 							{
-								"name": "Prénom",
+								"name": "credentialSubject.firstNames",
 								"value": props.location.state.data.firstNames
 							}
 						]
