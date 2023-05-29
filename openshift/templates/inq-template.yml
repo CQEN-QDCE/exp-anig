@@ -59,7 +59,7 @@ objects:
   metadata:
     name: inq-kms
   spec:
-    storageClassName: ocs-storagecluster-cephfs
+    storageClassName: gp2
     accessModes:
     - ReadWriteOnce
     resources:
@@ -377,7 +377,7 @@ objects:
   metadata:
     name: inq-agent
   spec:
-    host: inq-agent.apps.dev.openshift.cqen.ca
+    host: inq-agent.apps.exp.openshift.cqen.ca
     to:
       kind: Service
       name: inq-agent
@@ -390,19 +390,19 @@ objects:
     wildcardPolicy: None
   status:
     ingress:
-      - host: inq-agent.apps.dev.openshift.cqen.ca
+      - host: inq-agent.apps.exp.openshift.cqen.ca
         routerName: default
         conditions:
           - type: Admitted
             status: 'True'
         wildcardPolicy: None
-        routerCanonicalHostname: apps.dev.openshift.cqen.ca
+        routerCanonicalHostname: apps.exp.openshift.cqen.ca
 - kind: Route
   apiVersion: v1
   metadata:
     name: inq-agent-admin
   spec:
-    host: inq-agent-admin.apps.dev.openshift.cqen.ca
+    host: inq-agent-admin.apps.exp.openshift.cqen.ca
     to:
       kind: Service
       name: inq-agent
@@ -415,13 +415,13 @@ objects:
     wildcardPolicy: None
   status:
     ingress:
-      - host: inq-agent-admin.apps.dev.openshift.cqen.ca
+      - host: inq-agent-admin.apps.exp.openshift.cqen.ca
         routerName: default
         conditions:
           - type: Admitted
             status: 'True'
         wildcardPolicy: None
-        routerCanonicalHostname: apps.dev.openshift.cqen.ca
+        routerCanonicalHostname: apps.exp.openshift.cqen.ca
 
 #inq-controller
 - kind: ConfigMap
@@ -556,7 +556,7 @@ objects:
   metadata:
     name: inq
   spec:
-    host: inq.apps.dev.openshift.cqen.ca
+    host: inq.apps.exp.openshift.cqen.ca
     to:
       kind: Service
       name: inq-controller
@@ -569,13 +569,13 @@ objects:
     wildcardPolicy: None
   status:
     ingress:
-      - host: inq.apps.dev.openshift.cqen.ca
+      - host: inq.apps.exp.openshift.cqen.ca
         routerName: default
         conditions:
           - type: Admitted
             status: "True"
         wildcardPolicy: None
-        routerCanonicalHostname: apps.dev.openshift.cqen.ca
+        routerCanonicalHostname: apps.exp.openshift.cqen.ca
 parameters:
 - name: GITHUB_WEBHOOK_SECRET
   description: A secret string used to configure the GitHub webhook for the marketplace app build
@@ -603,7 +603,7 @@ parameters:
   displayName: Genesis file URL
   description: The URL from which the genesis file can be downloaded.
   required: true
-  value: https://candy-dev.cloudcompass.ca/genesis
+  value: https://raw.githubusercontent.com/ICCS-ISAC/dtrust-reconu/main/CANdy/dev/pool_transactions_genesis
 - name: LOG_LEVEL
   displayName: Log Level
   description: The logging level of the agent.
@@ -689,9 +689,9 @@ parameters:
   displayName: Agent endpoint
   description: The endpoint of the agent.
   required: true
-  value: "https://inq-agent.apps.dev.openshift.cqen.ca"
+  value: "https://inq-agent.apps.exp.openshift.cqen.ca"
 - name: AGENT_ADMIN_ENDPOINT
   displayName: Agent endpoint
   description: The admin endpoint of the agent.
   required: true
-  value: "https://inq-agent-admin.apps.dev.openshift.cqen.ca"
+  value: "https://inq-agent-admin.apps.exp.openshift.cqen.ca"
