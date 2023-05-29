@@ -191,6 +191,7 @@ objects:
       type: Git
       git:
         uri: 'https://github.com/CQEN-QDCE/exp-anig.git'
+        ref: "port-e"
     triggers:
       - github:
           secretReference:
